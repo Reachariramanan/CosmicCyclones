@@ -1,0 +1,213 @@
+============================================================
+VARIABLE IMPORTANCE SUMMARY
+============================================================
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+CAUTION: ONE OR MORE MODELS SHOW NEGATIVE GROUP CV R².
+Negative R² means the model performs WORSE than a mean
+baseline (predicting the average wind for every observation).
+Feature importance rankings computed from these models are
+unreliable — they reflect the model's internal structure but
+NOT predictive power over unseen storms.
+This could be due to:
+  1. Insufficient signal in astronomical/vedic features alone.
+  2. High variance across storms (each storm is unique).
+  3. Missing meteorological drivers (SST, wind shear, etc.).
+Rankings below show relative importance WITHIN these models,
+not evidence that any feature is truly predictive of wind.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Model Group CV R² Scores (GroupKFold=5, grouped by storm_id):
+  Random Forest:  -0.0901 ± 0.0397
+  XGBoost:        -0.1089 ± 0.0500
+  LightGBM:       -0.1010 ± 0.0262
+
+IMPORTANT Variables (93):
+  longitude: 0.058839
+  latitude: 0.042006
+  spline_end_lon: 0.034040
+  dinamana_minutes: 0.020688
+  vedic_chandra_speed_deg_per_day: 0.020296
+  spline_bearing_deg: 0.018678
+  elevation: 0.017924
+  ratrimana_minutes: 0.017369
+  mars_ecliptic_lat_deg: 0.016822
+  sun_dec_deg: 0.016209
+  spline_end_lat: 0.015192
+  vedic_arun_speed_deg_per_day: 0.014613
+  vedic_budha_speed_deg_per_day: 0.013916
+  mercury_ecliptic_lat_deg: 0.013741
+  mercury_dec_deg: 0.013154
+  venus_ecliptic_lat_deg: 0.012775
+  vedic_chandra_full_degree: 0.012728
+  saturn_dec_deg: 0.012645
+  neptune_ecliptic_lon_deg: 0.012293
+  nearest_lat: 0.011610
+  vedic_budha_full_degree: 0.010981
+  vedic_surya_declination: 0.010773
+  vedic_varun_right_ascension: 0.010641
+  moon_ecliptic_lat_deg: 0.010517
+  vedic_spashth_rahu_speed_deg_per_day: 0.010295
+  vedic_guru_full_degree: 0.010229
+  jupiter_ecliptic_lon_deg: 0.009787
+  day_of_year: 0.009690
+  vedic_rahu_full_degree: 0.008979
+  jupiter_dec_deg: 0.008824
+  venus_dec_deg: 0.008584
+  spline_length_deg: 0.008500
+  saturn_ecliptic_lat_deg: 0.008448
+  vedic_shukra_speed_deg_per_day: 0.008230
+  nearest_lon: 0.008214
+  vedic_shukra_declination: 0.008151
+  vedic_budha_declination: 0.008116
+  vedic_mangal_full_degree: 0.008102
+  neptune_ra_hours: 0.007826
+  moon_dec_deg: 0.007792
+  vedic_surya_full_degree: 0.007613
+  vedic_mangal_padam: 0.007599
+  vedic_spashth_rahu_right_ascension: 0.007580
+  lahiri_ayanamsha: 0.007538
+  vedic_surya_speed_deg_per_day: 0.007334
+  vedic_guru_speed_deg_per_day: 0.007272
+  vedic_spashth_rahu_full_degree: 0.007188
+  mercury_ecliptic_lon_deg: 0.007113
+  vedic_shani_declination: 0.007062
+  moon_ra_hours: 0.006961
+  sun_ra_hours: 0.006792
+  vedic_mangal_declination: 0.006767
+  vedic_shukra_full_degree: 0.006708
+  vedic_arun_full_degree: 0.006703
+  venus_ecliptic_lon_deg: 0.006680
+  vedic_ketu_declination: 0.006657
+  vedic_chandra_right_ascension: 0.006620
+  mars_dec_deg: 0.006536
+  jupiter_ecliptic_lat_deg: 0.006506
+  day_of_week: 0.006491
+  vedic_spashth_rahu_padam: 0.006423
+  vedic_shukra_padam: 0.006194
+  vedic_shukra_right_ascension: 0.006084
+  sun_ecliptic_lon_deg: 0.005956
+  vedic_chandra_declination: 0.005887
+  uranus_ecliptic_lat_deg: 0.005882
+  vedic_yam_full_degree: 0.005832
+  vedic_shani_speed_deg_per_day: 0.005777
+  jupiter_ra_hours: 0.005760
+  vedic_budha_right_ascension: 0.005731
+  vedic_yam_declination: 0.005687
+  vedic_guru_declination: 0.005579
+  moon_ecliptic_lon_deg: 0.005577
+  neptune_dec_deg: 0.005568
+  vedic_yam_right_ascension: 0.005492
+  vedic_surya_padam: 0.005476
+  vedic_shani_padam: 0.005392
+  mars_ra_hours: 0.005328
+  vedic_mangal_speed_deg_per_day: 0.005313
+  venus_ra_hours: 0.005260
+  mercury_ra_hours: 0.005216
+  vedic_budha_padam: 0.005152
+  mars_ecliptic_lon_deg: 0.005115
+  vedic_varun_declination: 0.004770
+  spline_displacement: 0.004691
+  vedic_yam_speed_deg_per_day: 0.004655
+  neptune_ecliptic_lat_deg: 0.004597
+  spline_curvature: 0.004551
+  vedic_rahu_right_ascension: 0.004545
+  vedic_guru_padam: 0.004475
+  year: 0.004465
+  saturn_ra_hours: 0.004379
+  vedic_rahu_padam: 0.004354
+
+UNIMPORTANT Variables (93):
+  uranus_ra_hours: 0.004326
+  saturn_ecliptic_lon_deg: 0.004044
+  vedic_arun_padam: 0.003853
+  vedic_varun_padam: 0.003850
+  vedic_arun_declination: 0.003734
+  vedic_arun_right_ascension: 0.003682
+  vedic_shani_full_degree: 0.003527
+  vedic_spashth_rahu_declination: 0.003498
+  vedic_varun_speed_deg_per_day: 0.003492
+  vedic_mangal_right_ascension: 0.003467
+  vedic_shani_right_ascension: 0.003466
+  vedic_rahu_declination: 0.003264
+  vedic_spashth_ketu_declination: 0.003118
+  vedic_surya_right_ascension: 0.002982
+  spline_point_count: 0.002920
+  uranus_dec_deg: 0.002661
+  vedic_guru_right_ascension: 0.002601
+  vedic_spashth_ketu_right_ascension: 0.002519
+  vedic_varun_full_degree: 0.002324
+  vedic_spashth_ketu_speed_deg_per_day: 0.002265
+  vedic_spashth_ketu_full_degree: 0.002065
+  vedic_yam_padam: 0.002044
+  uranus_ecliptic_lon_deg: 0.001915
+  vedic_spashth_ketu_padam: 0.001149
+  vedic_ketu_right_ascension: 0.001122
+  mars_cos_az: 0.001070
+  vedic_ketu_padam: 0.001069
+  timezone_offset: 0.001002
+  hour_utc: 0.000992
+  saturn_cos_alt: 0.000915
+  uranus_sin_az: 0.000855
+  uranus_cos_az: 0.000853
+  sun_sin_az: 0.000847
+  venus_cos_alt: 0.000818
+  moon_cos_az: 0.000808
+  venus_cos_az: 0.000789
+  mercury_cos_alt: 0.000774
+  vedic_lagna_speed_deg_per_day: 0.000762
+  jupiter_cos_alt: 0.000735
+  neptune_cos_alt: 0.000728
+  mars_cos_alt: 0.000723
+  mars_altitude_deg: 0.000706
+  jupiter_altitude_deg: 0.000683
+  neptune_sin_az: 0.000646
+  vedic_lagna_full_degree: 0.000645
+  moon_cos_alt: 0.000624
+  jupiter_sin_az: 0.000612
+  venus_sin_az: 0.000604
+  neptune_altitude_deg: 0.000589
+  vedic_lagna_declination: 0.000587
+  moon_sin_az: 0.000563
+  vedic_lagna_padam: 0.000546
+  saturn_cos_az: 0.000528
+  uranus_azimuth_deg: 0.000527
+  jupiter_azimuth_deg: 0.000519
+  venus_azimuth_deg: 0.000513
+  mars_sin_az: 0.000504
+  sun_ecliptic_lat_deg: 0.000503
+  uranus_altitude_deg: 0.000488
+  neptune_cos_az: 0.000474
+  mercury_sin_az: 0.000471
+  sun_cos_az: 0.000457
+  mercury_altitude_deg: 0.000456
+  saturn_altitude_deg: 0.000430
+  moon_azimuth_deg: 0.000421
+  uranus_cos_alt: 0.000408
+  moon_altitude_deg: 0.000408
+  mars_azimuth_deg: 0.000397
+  saturn_sin_az: 0.000396
+  mercury_azimuth_deg: 0.000389
+  sun_azimuth_deg: 0.000383
+  neptune_azimuth_deg: 0.000374
+  vedic_ketu_full_degree: 0.000372
+  venus_altitude_deg: 0.000361
+  vedic_lagna_right_ascension: 0.000356
+  saturn_azimuth_deg: 0.000339
+  mercury_cos_az: 0.000331
+  sun_altitude_deg: 0.000305
+  sun_cos_alt: 0.000298
+  jupiter_cos_az: 0.000264
+  vedic_chandra_padam: 0.000259
+  mars_sin_alt: 0.000149
+  saturn_sin_alt: 0.000082
+  month: 0.000070
+  venus_sin_alt: 0.000039
+  mercury_sin_alt: 0.000039
+  jupiter_sin_alt: 0.000038
+  neptune_sin_alt: 0.000031
+  moon_sin_alt: 0.000031
+  uranus_sin_alt: 0.000028
+  sun_sin_alt: 0.000027
+  vedic_rahu_speed_deg_per_day: 0.000000
+  vedic_ketu_speed_deg_per_day: 0.000000

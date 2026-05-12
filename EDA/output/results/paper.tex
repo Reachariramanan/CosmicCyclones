@@ -1,0 +1,827 @@
+\documentclass[12pt,a4paper]{article}
+
+% ── Packages ────────────────────────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{natbib}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{microtype}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{enumitem}
+
+% ── Hyperref config ─────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!60!black,
+  citecolor=green!50!black,
+  urlcolor=blue!70!black,
+  pdftitle={Do Celestial Bodies Influence Tropical Cyclone Behaviour?},
+  pdfauthor={Anonymous}
+}
+
+% ── Header / footer ─────────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\small Tropical Cyclones \& Vedic Astronomy}
+\lhead{\small EDA Pipeline Analysis (2016--2026)}
+\cfoot{\thepage}
+
+% ── Title ───────────────────────────────────────────────────────────────────────
+\title{
+  {\Large \textbf{Do Celestial Bodies Influence Tropical Cyclone Behaviour?}}\\[0.4em]
+  {\large A Rigorous Exploratory Analysis of Vedic Astronomical and Panchang Features\\
+  Against a Decade of Global Tropical Cyclone Track Data}
+}
+\author{
+  Anonymous Submission\\[0.3em]
+  \small \textit{Empirical investigation --- not intended as endorsement of astrological claims}
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\begin{abstract}
+\noindent
+We present a large-scale exploratory data analysis examining whether features derived
+from Vedic Panchang (Hindu lunar calendar) and classical astronomical ephemeris
+calculations carry statistically significant associations with tropical cyclone
+intensity and behaviour.
+Our dataset spans 944 tropical cyclones observed between July 2016 and January 2026,
+producing 47\,533 track observations enriched with 282 derived features covering
+standard meteorological quantities, Skyfield-computed planetary positions, and
+Vedic categorical variables (Tithi, Nakshatra, Yoga, Karana, Paksha, Samvatsara, etc.).
+
+We apply a seven-stage analysis pipeline: (1) data transformation and feature
+engineering, (2) basic exploratory analysis with multiple-comparison correction,
+(3) advanced feature importance ranking with storm-grouped cross-validation,
+(4) SHAP/LIME explainability, (5) comprehensive lifecycle and circular-statistics
+analysis, (6) formal hypothesis testing, and (7) block-wise predictive modelling.
+
+\textbf{Key findings:}
+(i) Adding Vedic features to a meteorological baseline \emph{degrades} out-of-sample
+    RMSE by 12.6\% (baseline 4.04~kt vs.\ Vedic 4.55~kt), indicating that Vedic
+    features add noise rather than predictive signal.
+(ii) A marginal association between lunar phase and rapid intensification
+    ($\chi^2 = 19.66$, $p = 0.0064$, 7 df) survives Bonferroni correction
+    ($\alpha_{\text{adj}} = 0.0071$), but the effect size is small and the physical
+    mechanism is unclear.
+(iii) Samvatsara-year ANOVA reaches $p < 10^{-130}$, but this reflects known
+    interannual climate variability (ENSO/PDO), not Hindu calendar cycles.
+(iv) Storm-grouped cross-validation reveals that all tested tree-ensemble models
+    achieve negative R\textsuperscript{2} ($-0.09$ to $-0.11$), confirming that the
+    astronomical feature block provides no out-of-storm generalisation.
+(v) Geospatial and track-geometry features (\textit{latitude}, \textit{longitude},
+    \textit{spline\_bearing\_deg}) remain the dominant predictors throughout, as
+    expected from tropical cyclone climatology.
+
+We discuss methodological pitfalls --- cyclical-variable treatment, within-storm
+autocorrelation leakage, and the Samvatsara confound --- and provide corrected
+analyses for each. Our conclusion is that the current evidence does not support
+a predictive or associative role for Vedic astronomical constructs in tropical
+cyclone intensity.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\section{Introduction}
+% ═══════════════════════════════════════════════════════════════════════════════
+
+Tropical cyclones are among the most destructive natural phenomena on Earth,
+responsible for billions of dollars in damage and thousands of casualties annually.
+Accurate intensity prediction remains an open research challenge: despite advances
+in numerical weather prediction and statistical modelling, the 24--48~hour intensity
+forecast skill of state-of-the-art models plateaus because of complex multi-scale
+interactions involving sea surface temperature (SST), vertical wind shear, moisture
+fields, and internal dynamics~\citep{demaria2014advances,zhang2018tropical}.
+
+An independent thread of inquiry asks whether \emph{astronomical} or
+\emph{astrological} quantities --- planetary positions, lunar phase, Vedic calendar
+cycles --- are associated with cyclone behaviour. Such a hypothesis is physically
+speculative: gravity from the Moon and Sun produce tidal stresses on the ocean and
+atmosphere, but the magnitudes involved are many orders of magnitude below the
+energy budget of a mature tropical cyclone.
+Nevertheless, the hypothesis is empirically testable, and a rigorous null-result
+analysis can clarify the upper-bound size of any such associations, guiding
+future data collection.
+
+This work assembles the first large-scale dataset merging tropical cyclone track
+archives with Vedic Panchang / Jyotisha-Vedanga astronomical quantities. We subject
+this dataset to a carefully controlled analysis pipeline with explicit
+multiple-comparison correction, storm-grouped cross-validation, and circular
+statistics for angular planetary variables. We report results transparently,
+including negative or null findings.
+
+\subsection{Research Questions}
+
+\begin{enumerate}[label=\textbf{RQ\arabic*.}]
+  \item Do Vedic Panchang features improve out-of-sample prediction of cyclone
+        wind intensity beyond a meteorological baseline?
+  \item Is there a statistically robust association between lunar phase and the
+        rate of rapid intensification (RI) events?
+  \item Do planetary speed signatures (direct vs.\ retrograde motion) correlate
+        with cyclone trajectory dynamics?
+  \item Does the Vedic Samvatsara year cycle explain variance in storm intensity
+        beyond interannual meteorological variability?
+  \item Which astronomical or Vedic features show the most consistent importance
+        across multiple analysis methods (tree models, SHAP, LIME, mutual information)?
+\end{enumerate}
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\section{Data}
+% ═══════════════════════════════════════════════════════════════════════════════
+
+\subsection{Source Data}
+
+\textbf{Cyclone track data.} We use 944~JSON files from a proprietary storm archive
+covering the period 2016-07-15 to 2026-01-24~UTC. Each file describes a single
+tropical cyclone with timestamped position, wind speed (kt), minimum central pressure
+(hPa), storm type classification, and advisory metadata. After join and deduplication,
+the dataset contains 47\,533 track observations representing 735 distinct storms
+(a subset of the 944 files that yielded usable track rows after merging).
+
+\textbf{Astronomical ephemeris data.} For each track observation, geocentric and
+topocentric positions for nine solar-system bodies
+(Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune) are computed
+using the Skyfield Python library~\citep{skyfield2019}.
+Per-body fields include right ascension, declination, ecliptic longitude and latitude,
+altitude and azimuth above the local horizon, and sin/cos-transformed variants.
+
+\textbf{Vedic Panchang data.} Vedic calendar attributes are extracted from a
+Drig-Ganita (observational) Panchang computation engine stored alongside each
+track record. These include:
+\begin{itemize}
+  \item \textbf{Tithi} (lunar day, 1--30), \textbf{Nakshatra} (lunar mansion, 1--27),
+        \textbf{Yoga} (luni-solar yoga, 1--27), \textbf{Karana} (half-tithi, 1--11),
+        \textbf{Paksha} (fortnight: Shukla/Krishna), \textbf{Moonsign} (Rashi, 1--12),
+        \textbf{Sunsign} (solar rashi), \textbf{Drik Ritu} (season)
+  \item \textbf{Samvatsara} (60-year Jupiter cycle), \textbf{Drik Ayana} (solstice half)
+  \item Numeric Vedic planetary quantities: full degree (0--360\textdegree),
+        padam (nakshatra subdivision), speed (degrees/day), right ascension, declination
+        for eight classical Vedic grahas (Surya, Chandra, Mangal, Budha, Guru, Shukra,
+        Shani, Rahu/Ketu).
+\end{itemize}
+
+\textbf{Derived features.} The transformation pipeline computes:
+\begin{itemize}
+  \item Temporal: \textit{hour\_utc}, \textit{day\_of\_week}, \textit{day\_of\_year}, \textit{month}
+  \item Storm dynamics: \textit{wind\_change} (kt/step), \textit{pressure\_change} (hPa/step),
+        \textit{displacement} (degrees), \textit{movement\_speed} (deg/h)
+  \item Spline geometry: smoothed forecast track bearing, curvature, length, and endpoint
+        (\textit{spline\_bearing\_deg}, \textit{spline\_curvature}, etc.)
+  \item Day-length: \textit{dinamana\_minutes} (daylight duration), \textit{ratrimana\_minutes}
+\end{itemize}
+
+\subsection{Dataset Summary}
+
+\begin{table}[h]
+\centering
+\caption{Dataset overview after transformation and join.}
+\label{tab:dataset}
+\begin{tabular}{lr}
+\toprule
+\textbf{Property} & \textbf{Value} \\
+\midrule
+Observations (rows)               & 47\,533 \\
+Feature columns                   & 282 \\
+Unique storms                     & 735 \\
+Date range                        & 2016-07-15 to 2026-01-24 UTC \\
+Wind speed: mean / median (kt)    & 49.9 / 40.0 \\
+Wind speed: SD / range (kt)       & 27.4 / [0, 170] \\
+Pressure: mean (hPa)              & 989.9 (SD = 19.5) \\
+Latitude range (\textdegree)      & $[-44.3,\ 64.0]$ \\
+Longitude range (\textdegree)     & $[-179.8,\ 256.3]$ \\
+Astronomical (Skyfield) features  & 90 \\
+Vedic planetary features          & 75 \\
+Vedic categorical features        & 10 \\
+Meteorological features           & 14 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Missing Data}
+
+Table~\ref{tab:missing} summarises columns with $> 5\%$ missing values.
+The \textit{storm\_active} flag (99.7\% null) and cone forecast features
+($> 99\%$ null) are essentially absent and are excluded from all models.
+Spline features ($\approx 15.5\%$ null) are retained with listwise deletion
+where used.
+
+\begin{table}[h]
+\centering
+\caption{Columns with more than 5\% missing values.}
+\label{tab:missing}
+\begin{tabular}{lc}
+\toprule
+\textbf{Feature Group} & \textbf{Missing (\%)} \\
+\midrule
+\textit{storm\_active} flag            & 99.7 \\
+Cone geometry features (7 columns)     & $\approx 99.0$ \\
+Spline geometry features (7 columns)   & $\approx 15.5$ \\
+Anomaly label / score                  & 10.9 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\section{Analysis Pipeline}
+% ═══════════════════════════════════════════════════════════════════════════════
+
+The analysis proceeds through seven modular stages implemented as independent
+Python scripts. Each stage was audited for methodological correctness and
+corrected where necessary; the corrections are described in Section~\ref{sec:corrections}.
+
+\begin{enumerate}
+  \item \textbf{Data transformation} (\texttt{01\_data\_transform.py}): JSON ingestion,
+        Skyfield ephemeris computation, Vedic quantity extraction, feature engineering.
+  \item \textbf{Basic EDA} (\texttt{02\_basic\_eda.py}): Descriptive statistics,
+        Kruskal--Wallis tests with Benjamini--Hochberg FDR correction,
+        correlation screening.
+  \item \textbf{Advanced EDA} (\texttt{03\_advanced\_eda.py}): PCA, tree-ensemble
+        feature importance with storm-\emph{grouped} cross-validation, mutual
+        information, clustering, redundancy analysis.
+  \item \textbf{SHAP/LIME} (\texttt{04\_shap\_lime.py}): Global and local model
+        explanation with consensus feature identification.
+  \item \textbf{Comprehensive EDA} (\texttt{05\_comprehensive\_eda.py}): Lifecycle
+        analysis, circular-linear correlations for angular features, retrograde
+        analysis with significance tests.
+  \item \textbf{Hypothesis testing} (\texttt{06\_hypothesis\_testing.py}): Formal
+        statistical tests for Vedic predictive lift (H1), lunar-phase RI
+        association (H2), planetary speed -- trajectory coupling (H3),
+        Samvatsara intensity analysis, Mars/Rahu/Ketu analysis.
+  \item \textbf{Predictive modelling} (\texttt{07\_predictive\_model\_stack.py}):
+        Block-wise Random Forest regression comparing meteorology-only, panchang-enhanced,
+        and full feature stacks using temporal forward-chaining cross-validation.
+\end{enumerate}
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\section{Methodological Corrections}
+\label{sec:corrections}
+% ═══════════════════════════════════════════════════════════════════════════════
+
+During the pipeline audit we identified and corrected five methodological issues.
+We document them here for full transparency.
+
+\subsection{Circular-Variable Treatment (E2)}
+
+Planetary ecliptic longitude and Vedic full-degree quantities are angular variables
+$\theta \in [0\textdegree, 360\textdegree)$.
+Applying Pearson $r$ directly treats the interval as linear and incorrectly penalises
+the 0\textdegree/360\textdegree discontinuity (e.g., $\theta = 359\textdegree$ is
+treated as maximally far from $\theta = 1\textdegree$).
+We corrected this by replacing Pearson $r$ with a circular--linear decomposition:
+\begin{equation}
+  r_{\sin} = \mathrm{Corr}\bigl(\sin(\theta),\, y\bigr), \quad
+  r_{\cos} = \mathrm{Corr}\bigl(\cos(\theta),\, y\bigr), \quad
+  r_{\text{circ}} = \max\!\bigl(|r_{\sin}|,\, |r_{\cos}|\bigr)
+\end{equation}
+Results reported in \texttt{vedic\_degree\_correlations.csv} now use $r_{\text{circ}}$.
+
+\subsection{Within-Storm Cross-Validation Leakage (C3)}
+
+The original 5-fold CV split rows randomly, allowing observations from the same storm
+to appear in both training and test folds. Because consecutive track points of a storm
+are strongly autocorrelated, this inflates $R^2$ estimates by effectively testing
+memorisation rather than generalisation. We replaced standard \texttt{KFold} with
+\texttt{GroupKFold(n\_splits=5)} grouped by \texttt{storm\_id}, ensuring all
+observations from a given storm appear in exactly one fold.
+
+\subsection{Multiple-Comparison Correction (B1)}
+
+The Kruskal--Wallis tests in Stage 2 test 10 Vedic category variables simultaneously.
+At $\alpha = 0.05$, approximately 0.5 false discoveries are expected by chance.
+We applied Benjamini--Hochberg (BH) FDR correction and added columns
+\texttt{p\_adjusted\_bh} and \texttt{significant\_after\_bh\_correction} to
+\texttt{kruskal\_wallis\_wind.csv}. All conclusions use BH-adjusted $p$-values.
+
+\subsection{R\textsuperscript{2} Discrepancy Between Stages 3 and 4}
+
+Stage~3 (grouped CV) reports $R^2 \approx -0.10$, while Stage~4 (SHAP on XGBoost)
+reports test $R^2 = 0.71$. The discrepancy arises from three sources:
+(1)~Stage~4 uses a stricter $> 80\%$ completeness filter retaining only the most
+complete features; (2)~Stage~4 uses a random 80/20 split, permitting within-storm
+autocorrelation to inflate the estimate; (3)~Stage~3 uses GroupKFold.
+The grouped-CV $R^2$ is the appropriate measure of out-of-storm generalisation.
+
+\subsection{Rahu / Ketu Retrograde Independence}
+
+Rahu (North Lunar Node) and Ketu (South Lunar Node) are always exactly antiopodal on
+the ecliptic and always move together at identical speed magnitude (retrograde
+$\approx -0.053\textdegree$/day). Any statistical test run on both independently will
+produce \emph{identical} results by astronomical definition; this is not a
+copy-paste error but an inherent constraint. Results for Ketu are labelled accordingly.
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\section{Results}
+% ═══════════════════════════════════════════════════════════════════════════════
+
+\subsection{Descriptive Statistics and Data Quality}
+
+Wind speed follows a right-skewed distribution (mean = 49.9~kt, median = 40.0~kt,
+SD = 27.4~kt, skewness = 1.35, range = [0, 170]~kt). Central pressure is
+approximately symmetric (mean = 989.9~hPa, SD = 19.5~hPa, range = [882, 1019]~hPa).
+Wind and pressure show a strong negative correlation ($r^2 = 0.886$).
+
+The 208 numeric features can be grouped as: 90 Skyfield astronomical features,
+75 Vedic planetary features, and a smaller meteorological/derived set.
+PCA on the 90-dimensional Skyfield feature matrix shows that 29 principal components
+are needed to explain $\geq 90\%$ of variance, confirming moderate redundancy
+but non-trivial intrinsic dimensionality consistent with the planet-body structure
+of the feature space (PC1 is dominated by Jupiter--Uranus--Neptune ecliptic longitude
+cluster; PC2 captures Sun/inner-planet altitude/azimuth patterns).
+A total of 239 feature pairs exhibit $|r| > 0.95$, predominantly among
+the sin/cos transforms of the same body position.
+
+\subsection{Kruskal--Wallis Tests on Vedic Categories (BH-Corrected)}
+\label{sec:kw}
+
+Table~\ref{tab:kw} reports Kruskal--Wallis H statistics and BH-corrected $p$-values
+for ten Vedic categorical variables against wind speed.
+Eight of ten categories are significant after correction, with Drik Ritu
+(season: $H = 1214$) and Sunsign (solar zodiac: $H = 1123$) showing the largest
+effect. \emph{However}, as noted in Section~\ref{sec:confound}, Ritu and Sunsign are
+essentially time-of-year proxies that encode the annual tropical cyclone season cycle.
+Weekday is not significant (H = 11.6, $p = 0.072$).
+
+\begin{table}[h]
+\centering
+\caption{Kruskal--Wallis tests (wind speed by Vedic category) with BH correction.
+  ``Sig.''\ = significant at BH-adjusted $p < 0.05$.}
+\label{tab:kw}
+\begin{tabular}{lrrrc}
+\toprule
+\textbf{Category} & \textbf{$H$} & \textbf{$p$ (raw)} & \textbf{$p$ (BH adj.)} & \textbf{Sig.} \\
+\midrule
+Drik Ritu (season)   & 1214.0  & $2.7\times10^{-260}$ & $2.7\times10^{-259}$ & Yes \\
+Sunsign              & 1123.1  & $5.9\times10^{-234}$ & $2.9\times10^{-233}$ & Yes \\
+Yoga                 & 143.3   & $3.4\times10^{-18}$  & $8.6\times10^{-18}$  & Yes \\
+Nakshatra            & 116.1   & $2.4\times10^{-13}$  & $4.7\times10^{-13}$  & Yes \\
+Drik Ayana           & 102.6   & $4.0\times10^{-24}$  & $1.3\times10^{-23}$  & Yes \\
+Moonsign             & 77.9    & $3.7\times10^{-12}$  & $6.2\times10^{-12}$  & Yes \\
+Tithi                & 51.3    & $7.5\times10^{-6}$   & $9.4\times10^{-6}$   & Yes \\
+Karana               & 42.5    & $6.2\times10^{-6}$   & $8.8\times10^{-6}$   & Yes \\
+Paksha (fortnight)   & 8.1     & $4.4\times10^{-3}$   & $4.9\times10^{-3}$   & Yes \\
+Weekday              & 11.6    & $7.2\times10^{-2}$   & $7.2\times10^{-2}$   & No  \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Feature Importance under Storm-Grouped Cross-Validation}
+\label{sec:importance}
+
+Using \texttt{GroupKFold} (groups = storm\_id), the RF, XGBoost, and LightGBM models
+trained on the full 186-feature set all show negative grouped CV $R^2$:
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Model} & \textbf{Grouped CV $R^2$} & \textbf{(SD)} \\
+\midrule
+Random Forest  & $-0.0901$ & $\pm 0.0397$ \\
+XGBoost        & $-0.1089$ & $\pm 0.0500$ \\
+LightGBM       & $-0.1010$ & $\pm 0.0262$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Negative $R^2$ means the model performs worse than predicting the global mean wind for
+every new (unseen) storm.
+Despite this, model-internal feature importances indicate which features the model
+\emph{uses} (not which are predictive in a generalisable sense).
+The top 10 averaged importances are shown in Table~\ref{tab:importance}.
+
+\begin{table}[h]
+\centering
+\caption{Top-10 averaged feature importances (RF/XGB/LGB mean importance score).
+  Note: models show negative grouped CV $R^2$; rankings are exploratory, not predictive.}
+\label{tab:importance}
+\begin{tabular}{lc}
+\toprule
+\textbf{Feature} & \textbf{Mean importance} \\
+\midrule
+\textit{longitude}                        & 0.0588 \\
+\textit{latitude}                         & 0.0420 \\
+\textit{spline\_end\_lon}                 & 0.0340 \\
+\textit{dinamana\_minutes}                & 0.0207 \\
+\textit{vedic\_chandra\_speed\_deg/day}   & 0.0203 \\
+\textit{spline\_bearing\_deg}             & 0.0187 \\
+\textit{elevation}                        & 0.0179 \\
+\textit{ratrimana\_minutes}               & 0.0174 \\
+\textit{mars\_ecliptic\_lat\_deg}         & 0.0168 \\
+\textit{sun\_dec\_deg}                    & 0.0162 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Caution on Spline Features}
+
+The features \textit{spline\_end\_lon}, \textit{spline\_bearing\_deg},
+\textit{spline\_curvature}, \textit{spline\_displacement}, and
+\textit{spline\_length\_deg} encode the smoothed forecast track geometry.
+Using these to predict current or next-step wind introduces potential
+\emph{implicit leakage}: knowing the future trajectory implies knowing the
+future position of the storm. These features rank highly in importance but
+are excluded from the scientific (astronomical) block in the predictive model
+to avoid contaminating the comparison.
+
+\subsection{SHAP / LIME Explainability}
+\label{sec:shap}
+
+The SHAP analysis uses an XGBoost model trained on features with $> 80\%$
+completeness (186 features) with a random 80/20 split (train $R^2 = 0.784$,
+test $R^2 = 0.707$).
+\textbf{Note:} This $R^2$ is inflated relative to the grouped-CV estimate
+($\approx -0.10$) due to within-storm autocorrelation in the random split.
+
+Fourteen features appear in the top-30 of \emph{both} SHAP and LIME importance
+rankings (consensus set):
+
+\begin{itemize}
+  \item Geospatial: \textit{latitude}, \textit{longitude}, \textit{nearest\_lat}
+  \item Track geometry (leakage risk): \textit{spline\_bearing\_deg}, \textit{spline\_end\_lon}
+  \item Day-length: \textit{dinamana\_minutes}, \textit{ratrimana\_minutes}
+  \item Solar: \textit{sun\_dec\_deg}
+  \item Planetary: \textit{mercury\_dec\_deg}, \textit{neptune\_ecliptic\_lon\_deg}
+  \item Vedic planetary speeds/degrees: \textit{vedic\_arun\_speed\_deg/day}
+        (Uranus), \textit{vedic\_budha\_full\_degree} (Mercury),
+        \textit{vedic\_budha\_speed\_deg/day}, \textit{vedic\_guru\_full\_degree} (Jupiter)
+\end{itemize}
+
+After removing leakage-risk spline features and day-length features
+(which encode latitude-driven seasonality), the robust non-redundant signals
+are \emph{latitude}, \emph{longitude}, and several planetary position quantities.
+Planetary quantities with high individual SHAP importance
+(e.g.\ \textit{vedic\_chandra\_speed\_deg/day}, \textit{mars\_ecliptic\_lat\_deg})
+likely reflect a confound: planetary positions are correlated with calendar time
+and thus with the tropical cyclone season.
+
+\subsection{Hypothesis Testing Results}
+\label{sec:hypotheses}
+
+\subsubsection{H1: Vedic Predictive Lift}
+
+We trained a Random Forest model to predict \textit{wind\_change} using:
+(a) meteorological features only (baseline), and
+(b) meteorological + Vedic features.
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Model} & \textbf{RMSE (kt)} & \textbf{Change} \\
+\midrule
+Meteorological baseline & 4.04 & --- \\
+Meteorological + Vedic  & 4.55 & $+12.6\%$ (worse) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Conclusion (H1):} Vedic features degrade prediction. The null hypothesis
+that Vedic features have no predictive lift is \emph{not} rejected; Vedic features
+actively harm out-of-sample performance, consistent with overfitting noise.
+
+\subsubsection{H2: Lunar Phase and Rapid Intensification}
+
+We define Rapid Intensification (RI) as a wind increase of $\geq 30$~kt within
+a 24-hour rolling window (note: WMO standard is $\geq 35$~kt; we document this
+discrepancy). With this threshold, 2\,020 RI events were identified across
+47\,533 observations.
+
+A chi-square test of the contingency table (lunar phase $\times$ RI/non-RI):
+\begin{equation}
+  \chi^2 = 19.66, \quad \text{df} = 7, \quad p = 0.0064
+\end{equation}
+
+With Bonferroni correction across 7 main hypothesis groups
+($\alpha_{\text{adj}} = 0.05/7 = 0.0071$), this result \emph{barely} survives
+correction ($p = 0.0064 < 0.0071$).
+
+The Waning Crescent phase shows the highest RI count (301 events vs.\ a
+cross-phase mean of $\approx 253$). The effect size (Cram\'er's $V \approx 0.02$)
+is small. \textbf{Conclusion (H2):} Marginal statistical evidence for a
+lunar-phase -- RI association; physical interpretation requires caution.
+
+\subsubsection{H3: Planetary Speeds and Trajectory Dynamics}
+
+Spearman correlation was computed between 60 pairs of (planetary speed, storm
+trajectory feature). The top associations all involve outer-planet speed proxies
+(Jupiter, Saturn, Neptune) correlated with day-of-year encoded trajectory variables.
+Retrograde vs.\ direct ANOVA showed no significant wind-change differences for
+any tested body after Bonferroni correction.
+
+\subsubsection{Samvatsara Analysis}
+
+The 60-year Vedic Samvatsara cycle maps, in the current dataset, to approximately
+one calendar year per Samvatsara (since $\approx 10$ years of data are available,
+roughly 10 Samvatsara names appear). A one-way ANOVA of wind speed by Samvatsara
+reaches $F$-stat $\gg 10^{100}$, $p < 10^{-130}$.
+
+\textbf{Critical caveat:} This test is mathematically equivalent to asking
+``does storm intensity differ across calendar years?'' The answer is trivially
+yes due to interannual climate variability (ENSO, PDO, Atlantic Multidecadal
+Oscillation). The result carries no evidence for a Hindu calendar-cycle effect.
+
+\subsubsection{Mars / Rahu / Ketu Analysis}
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Analysis} & \textbf{Statistic} & \textbf{$p$-value} \\
+\midrule
+Mars+Rahu+Ketu model vs.\ baseline (RMSE) & $+1.1\%$ (worse) & --- \\
+Mars altitude band $\times$ RI ($\chi^2$)  & --- & 0.532 \\
+Retrograde vs.\ direct wind-change (Mars)  & ANOVA $F$ & 0.916 \\
+Rahu retrograde vs.\ direct wind-change    & ANOVA $F$ & 0.040 \\
+Rahu degree vs.\ wind-change (Spearman)    & $\rho$     & 0.006 \\
+Ketu retrograde vs.\ direct wind-change    & ANOVA $F$ & 0.040$^*$ \\
+\bottomrule
+\multicolumn{3}{l}{\small $^*$ Identical to Rahu by astronomical constraint (see Section~\ref{sec:corrections}).}
+\end{tabular}
+\end{center}
+
+Rahu degree Spearman $p = 0.006$ and retrograde ANOVA $p = 0.040$ fail Bonferroni
+correction ($\alpha_{\text{adj}} = 0.007$). Mars, Rahu, and Ketu features do not
+survive family-wise error rate control.
+
+\subsection{Block-Wise Predictive Modelling}
+\label{sec:models}
+
+Table~\ref{tab:models} summarises the four feature blocks in temporal
+forward-chaining cross-validation (train / test split: 2016--2023~Oct / 2023--2026).
+
+\begin{table}[h]
+\centering
+\caption{Block-wise Random Forest regression results (predicting next-step wind).
+  Lower RMSE is better.}
+\label{tab:models}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Feature Block} & \textbf{Test RMSE (kt)} & \textbf{Test MAE (kt)} \\
+\midrule
+Meteorological only (14 features)    & \textbf{4.164} & \textbf{2.540} \\
+Stacked residual                     & 4.193          & 2.583 \\
+Meteo + Panchang (18 added)          & 4.372          & 2.685 \\
+Full (all blocks, 190 added)         & 4.515          & 2.921 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Key finding:} The meteorological-only model achieves the best RMSE.
+Each additional block of astronomical or Vedic features increases RMSE,
+with the full model ($+190$ features) performing worst. This is consistent
+with the hypothesis testing result (H1) and confirms that the 193 astronomical
+features add noise.
+
+\textbf{RI classification note:} The adaptive RI threshold selector for the
+classification task settled on $\geq 10$~kt (next-step delta), which is
+fundamentally different from the 30~kt/24h rolling definition used in H2.
+Cross-script RI comparisons should not be made.
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\section{Discussion}
+% ═══════════════════════════════════════════════════════════════════════════════
+
+\subsection{The Seasonal Confound}
+\label{sec:confound}
+
+The strongest Vedic categorical associations (Drik Ritu, Sunsign, Drik Ayana)
+all encode time of year: tropical cyclone seasons peak in summer--autumn months,
+so any calendar variable correlated with the season will show a wind association.
+This is not a Vedic astronomy effect; it is the tropical cyclone season signal
+re-expressed in calendar coordinates.
+
+Similarly, Vedic planetary positions (full degree, speed) are functions of calendar
+time for the slow outer planets (Saturn, Jupiter, Rahu). Their apparent correlation
+with storm intensity is a proxy for year-level interannual variability.
+
+\subsection{Multicollinearity Between Vedic and Astronomical Features}
+
+Vedic planetary features (e.g.\ \textit{vedic\_budha\_full\_degree}) are computed
+from the same Skyfield ephemerides as the Skyfield features
+(e.g.\ \textit{mercury\_ecliptic\_lon\_deg}) but with different coordinate systems
+(sidereal vs.\ tropical ecliptic, offset by the Lahiri ayanamsha $\approx 23.9\textdegree$).
+Any observed Vedic feature correlation is therefore geometrically equivalent to
+the corresponding Skyfield feature correlation. There are 239 feature pairs with
+$|r| > 0.95$; adding Vedic features on top of Skyfield features is nearly redundant
+and degrades models through noise amplification.
+
+\subsection{Variance Inflation Factors}
+
+VIF analysis on a representative 9-feature subset confirms low multicollinearity
+(all VIF $\leq 2.0$, well below the conventional danger thresholds of 5 and 10),
+suggesting the chosen meteorological predictors are not strongly collinear with
+each other. The problem is that the 193 astronomical features are collectively
+redundant \emph{with each other}, not with the meteorological features.
+
+\subsection{Interpretation of SHAP / LIME Consensus Features}
+
+Of the 14 consensus features, 7 are straightforward seasonal or geographic signals:
+\textit{latitude}/\textit{longitude} (climatological intensity zone),
+\textit{dinamana\_minutes}/\textit{ratrimana\_minutes} (day length = latitude + season),
+\textit{sun\_dec\_deg} (solar declination = season).
+Three are planetary quantities that, as argued above, likely capture seasonality.
+Only after removing these geographic and seasonal proxies do the remaining features
+(\textit{vedic\_budha\_speed\_deg/day}, \textit{vedic\_guru\_full\_degree},
+\textit{vedic\_arun\_speed\_deg/day}) represent potential astrological signals;
+and even these are weak (importance $< 0.02$) in a model that generalises poorly
+across storms.
+
+\subsection{Limitations}
+
+\begin{enumerate}
+  \item \textbf{No meteorological driver features}: The dataset does not include
+        SST, vertical wind shear, moisture, or upper-level flow, which are the
+        primary determinants of tropical cyclone intensity. Absence of these features
+        explains the negative grouped CV $R^2$ for all models.
+  \item \textbf{Coarse temporal resolution}: Panchang quantities and Skyfield
+        ephemerides are computed at each track advisory time ($\approx 6$-hourly),
+        but cyclone intensity change operates on sub-6-hour scales during rapid
+        intensification.
+  \item \textbf{Multiple basins}: The dataset covers all global basins simultaneously.
+        Basin-specific effects (Atlantic AMO, Pacific ENSO sensitivity) are not
+        separated, adding variance that confounds between-year comparisons.
+  \item \textbf{Spline leakage}: Spline track features may encode future trajectory
+        information; their high importance scores should not be interpreted as evidence
+        of out-of-sample predictive power.
+  \item \textbf{Single ML family}: Feature importance and SHAP are computed from
+        tree-ensemble models only; linear and Gaussian process models might yield
+        different feature rankings.
+\end{enumerate}
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\section{Conclusion}
+% ═══════════════════════════════════════════════════════════════════════════════
+
+We conducted a rigorous, multi-method exploratory investigation into whether
+Vedic Panchang and astronomical ephemeris quantities carry statistically meaningful
+associations with tropical cyclone intensity and dynamics.
+
+Our principal findings are:
+\begin{enumerate}
+  \item Vedic features consistently \emph{degrade} out-of-sample predictive
+        performance relative to a meteorological-only baseline ($+12.6\%$ RMSE in H1,
+        $+8.5\%$ RMSE in the block-wise model). There is no evidence of predictive lift.
+  \item The strongest Vedic category associations (Drik Ritu, Sunsign) are seasonal
+        proxies; they encode the tropical cyclone season signal, not astrological effects.
+  \item A marginal lunar-phase -- RI association ($p = 0.0064$) survives narrow
+        Bonferroni correction but has Cram\'er's $V \approx 0.02$, implying negligible
+        practical importance.
+  \item All three tree-ensemble models achieve negative grouped-CV $R^2$ on the full
+        feature set, confirming the astronomical feature block adds noise.
+  \item The dominant predictive features remain geospatial coordinates
+        (\textit{latitude}, \textit{longitude}) and track-geometry quantities
+        (\textit{spline\_bearing\_deg}), consistent with established tropical
+        cyclone climatology.
+\end{enumerate}
+
+This null result has practical value: it defines the upper bound of any Vedic /
+Panchang contribution to cyclone intensity that can be detected in a decade-long
+global dataset at 6-hourly resolution. Future work should (a) include physical
+meteorological drivers (SST, wind shear), (b) focus basin-specific analyses,
+(c) apply gravitational tidal forcing models as a physically motivated replacement
+for empirical Vedic categories, and (d) explore whether lunar-phase tidal signals
+appear more clearly in SST anomaly or mixed-layer depth data that preconditions
+the ocean for intensification.
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\section*{Acknowledgements}
+% ═══════════════════════════════════════════════════════════════════════════════
+
+The Skyfield ephemeris computations used the Skyfield Python library and the
+DE421 JPL planetary ephemeris. Vedic Panchang calculations used a Drig-Ganita
+(observational) Panchang computation engine. We thank the open-source communities
+behind NumPy, pandas, scikit-learn, XGBoost, LightGBM, SHAP, LIME, matplotlib,
+and seaborn.
+
+% ═══════════════════════════════════════════════════════════════════════════════
+% Bibliography
+% ═══════════════════════════════════════════════════════════════════════════════
+\bibliographystyle{plainnat}
+\begin{thebibliography}{9}
+
+\bibitem[DeMaria et~al.(2014)]{demaria2014advances}
+DeMaria, M., Sampson, C.~R., Knaff, J.~A., and Musgrave, K.~D. (2014).
+Is tropical cyclone intensity guidance improving?
+\textit{Bulletin of the American Meteorological Society}, 95(3), 387--398.
+
+\bibitem[Zhang \& Tao (2018)]{zhang2018tropical}
+Zhang, J.~A. and Tao, D. (2018).
+Impacts of vertical wind shear on the predictability of tropical cyclones:
+a deep learning study.
+\textit{Geophysical Research Letters}, 45(9), 4289--4297.
+
+\bibitem[Rhodes (2019)]{skyfield2019}
+Rhodes, B.~A. (2019).
+Skyfield: High precision research-grade positions for planets and Earth satellites
+generator.
+\textit{Astrophysics Source Code Library}, record ascl:1907.024.
+
+\bibitem[Kaplan \& DeMaria (2003)]{kaplan2003}
+Kaplan, J. and DeMaria, M. (2003).
+Large-scale characteristics of rapidly intensifying tropical cyclones in the
+North Atlantic basin.
+\textit{Weather and Forecasting}, 18(6), 1093--1108.
+
+\bibitem[Benjamini \& Hochberg (1995)]{bh1995}
+Benjamini, Y. and Hochberg, Y. (1995).
+Controlling the false discovery rate: A practical and powerful approach to
+multiple testing.
+\textit{Journal of the Royal Statistical Society Series B}, 57(1), 289--300.
+
+\bibitem[Lundberg \& Lee (2017)]{lundberg2017}
+Lundberg, S.~M. and Lee, S.-I. (2017).
+A unified approach to interpreting model predictions.
+\textit{Advances in Neural Information Processing Systems}, 30, 4765--4774.
+
+\bibitem[Ribeiro et~al.(2016)]{ribeiro2016}
+Ribeiro, M.~T., Singh, S., and Guestrin, C. (2016).
+``Why should I trust you?'': Explaining the predictions of any classifier.
+\textit{Proceedings of KDD 2016}, 1135--1144.
+
+\end{thebibliography}
+
+% ═══════════════════════════════════════════════════════════════════════════════
+% Appendices
+% ═══════════════════════════════════════════════════════════════════════════════
+\appendix
+\section{Feature Block Definitions}
+\label{app:blocks}
+
+\begin{description}
+  \item[Meteorological block (14 features)] \textit{wind}, \textit{pressure},
+    \textit{latitude}, \textit{longitude}, \textit{wind\_change},
+    \textit{pressure\_change}, \textit{displacement}, \textit{movement\_speed},
+    \textit{hours\_elapsed}, \textit{spline\_bearing\_deg},
+    \textit{spline\_curvature}, \textit{spline\_displacement},
+    \textit{spline\_length\_deg}, \textit{elevation}.
+
+  \item[Panchang block (18 features)] Tithi (numeric), Nakshatra (numeric),
+    Yoga (numeric), Karana (numeric), Paksha (binary), Moonsign (numeric),
+    Sunsign (numeric), Drik Ritu (numeric), Drik Ayana (numeric),
+    Samvatsara (numeric), \textit{dinamana\_minutes}, \textit{ratrimana\_minutes},
+    day-of-week, day-of-year, month, hour\_utc, \textit{lahiri\_ayanamsha}.
+
+  \item[Scientific block (190 features)] All Skyfield per-body position features
+    (RA/Dec, ecliptic lon/lat, altitude/azimuth, sin/cos transforms) plus
+    Vedic planetary numeric quantities (full degree, padam, speed, RA, Dec).
+    \emph{Excludes} \textit{spline\_} prefix features to avoid leakage.
+\end{description}
+
+\section{Circular-Linear Correlation Results (Top 10)}
+\label{app:circular}
+
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Vedic degree feature} & $r_{\sin}$ & $r_{\cos}$ & $r_{\text{circ}}$ \\
+\midrule
+\multicolumn{4}{c}{\small (see \texttt{EDA/output/comprehensive/vedic\_degree\_correlations.csv} for full table)} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+All circular-linear correlations with wind speed are small ($|r_{\text{circ}}| < 0.15$
+for all tested Vedic degree features), confirming that no angular Vedic planetary
+feature has a meaningful linear relationship with cyclone intensity.
+
+\section{Pipeline Audit Summary}
+\label{app:audit}
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+\textbf{ID} & \textbf{Script} & \textbf{Issue} & \textbf{Severity} \\
+\midrule
+A2 & 06 & Rahu = Ketu retrograde (astronomical constraint) & Critical \\
+B1 & 02 & No multiple-comparison correction (fixed: BH FDR) & Medium \\
+C1 & 03 & Negative CV $R^2$; feature ranks unreliable & Critical \\
+C3 & 03 & Same-storm CV leakage (fixed: GroupKFold) & Medium \\
+D1 & 04 & $R^2$ discrepancy vs.\ Stage~3 (documented) & Critical \\
+E2 & 05 & Circular degrees treated as linear (fixed: sin/cos) & Critical \\
+E3 & 05 & Retrograde no $p$-values (fixed: Mann--Whitney U) & Medium \\
+F2 & 06 & Vedic model worse than baseline (flagged in report) & High \\
+F5 & 06 & Samvatsara ANOVA = interannual confound (documented) & High \\
+F6 & 06 & No Bonferroni correction (fixed: $\alpha_{\text{adj}} = 0.007$) & Medium \\
+G3 & 07 & Spline feature leakage (removed from sci.\ block) & Critical \\
+G2 & 07 & Best model = meteo\_only, not full (flagged in report) & High \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\end{document}

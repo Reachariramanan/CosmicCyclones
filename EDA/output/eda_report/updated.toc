@@ -1,0 +1,21 @@
+\contentsline {section}{\numberline {1}Overview and Data Description}{2}{section.1}%
+\contentsline {section}{\numberline {2}Feature Importance: Tree-Model Ensemble}{2}{section.2}%
+\contentsline {section}{\numberline {3}Mutual Information with Wind Speed}{3}{section.3}%
+\contentsline {section}{\numberline {4}SHAP Explainability Analysis}{4}{section.4}%
+\contentsline {subsection}{\numberline {4.1}SHAP Feature Importance}{5}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}SHAP Feature Interactions}{6}{subsection.4.2}%
+\contentsline {section}{\numberline {5}LIME Explainability and SHAP vs LIME Consensus}{7}{section.5}%
+\contentsline {section}{\numberline {6}Vedic Category Analysis: Kruskal--Wallis Tests}{8}{section.6}%
+\contentsline {section}{\numberline {7}Nakshatra Intensity Analysis}{9}{section.7}%
+\contentsline {section}{\numberline {8}Tithi $\times $ Nakshatra Interaction Heatmaps}{9}{section.8}%
+\contentsline {section}{\numberline {9}Retrograde Planetary Motion and Storm Intensity}{10}{section.9}%
+\contentsline {section}{\numberline {10}Planetary Aspect Correlations}{11}{section.10}%
+\contentsline {section}{\numberline {11}Vedic Planetary Degree: Circular-Linear Correlations}{12}{section.11}%
+\contentsline {section}{\numberline {12}Variance Inflation Factor (VIF) Analysis}{13}{section.12}%
+\contentsline {section}{\numberline {13}Intensity Change Analysis}{14}{section.13}%
+\contentsline {section}{\numberline {14}Summary and Methodological Notes}{15}{section.14}%
+\contentsline {subsection}{\numberline {14.1}Feature Importance Hierarchy}{15}{subsection.14.1}%
+\contentsline {subsection}{\numberline {14.2}Vedic Feature Signals}{15}{subsection.14.2}%
+\contentsline {subsection}{\numberline {14.3}Large-$N$ Significance Inflation}{15}{subsection.14.3}%
+\contentsline {subsection}{\numberline {14.4}Autocorrelation}{15}{subsection.14.4}%
+\contentsline {section}{\numberline {15}Conclusion}{15}{section.15}%

@@ -1,0 +1,68 @@
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Background and Problem Statement}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Motivation and Significance}{3}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Objectives and Contributions}{3}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Paper Organisation}{4}{subsection.1.4}%
+\contentsline {section}{\numberline {2}Related Works}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Tropical Cyclone Intensity Prediction}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Astronomical and Lunar Associations with Weather}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Machine Learning Feature Evaluation Methods}{5}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Limitations of Prior Works}{5}{subsection.2.4}%
+\contentsline {section}{\numberline {3}System Model and Proposed Methodology}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Overall Architecture}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Methodological Corrections Applied}{5}{subsection.3.2}%
+\contentsline {paragraph}{Circular-Variable Treatment (E2).}{5}{subsection.3.2}%
+\contentsline {paragraph}{Within-Storm Cross-Validation Leakage (C3).}{5}{equation.1}%
+\contentsline {paragraph}{Multiple-Comparison Correction (B1).}{6}{equation.1}%
+\contentsline {paragraph}{$R^2$ Discrepancy (D1).}{6}{equation.1}%
+\contentsline {paragraph}{Rahu/Ketu Independence (A2).}{6}{equation.1}%
+\contentsline {section}{\numberline {4}Dataset Description}{6}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Data Sources}{6}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Vedic Panchang Features}{7}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Dataset Summary}{7}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Inclusion and Exclusion Criteria}{8}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Preprocessing}{8}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Techniques Applied}{8}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Rapid Intensification Definition}{8}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Feature Extraction and Selection}{9}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Tree-Model Ensemble Feature Importance}{9}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Mutual Information with Wind Speed}{10}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Circular-Linear Correlations for Angular Features}{11}{subsection.6.3}%
+\contentsline {section}{\numberline {7}SHAP Explainability Analysis}{12}{section.7}%
+\contentsline {subsection}{\numberline {7.1}SHAP Feature Importance}{12}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}SHAP Feature Interactions}{14}{subsection.7.2}%
+\contentsline {section}{\numberline {8}LIME Explainability and SHAP vs LIME Consensus}{15}{section.8}%
+\contentsline {section}{\numberline {9}Performance Analysis}{17}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Experimental Setup}{17}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Evaluation Metrics}{18}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Hardware and Software}{18}{subsection.9.3}%
+\contentsline {subsection}{\numberline {9.4}Variance Inflation Factor Analysis}{18}{subsection.9.4}%
+\contentsline {section}{\numberline {10}Results and Discussion}{20}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Predictive Modelling Results}{20}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Vedic Category Analysis: Kruskal--Wallis Tests}{21}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Nakshatra Intensity Analysis}{23}{subsection.10.3}%
+\contentsline {subsection}{\numberline {10.4}Tithi $\times $ Nakshatra Interaction Heatmaps}{24}{subsection.10.4}%
+\contentsline {subsection}{\numberline {10.5}Retrograde Planetary Motion and Storm Intensity}{25}{subsection.10.5}%
+\contentsline {subsection}{\numberline {10.6}Planetary Aspect Correlations}{26}{subsection.10.6}%
+\contentsline {subsection}{\numberline {10.7}Intensity Change Analysis}{28}{subsection.10.7}%
+\contentsline {subsection}{\numberline {10.8}Hypothesis Testing Results}{28}{subsection.10.8}%
+\contentsline {paragraph}{H1: Vedic Predictive Lift.}{28}{subsection.10.8}%
+\contentsline {paragraph}{H2: Lunar Phase and Rapid Intensification.}{28}{subsection.10.8}%
+\contentsline {paragraph}{H3: Planetary Speeds and Storm Bearing.}{29}{subsection.10.8}%
+\contentsline {paragraph}{H4: Retrograde Effects.}{29}{subsection.10.8}%
+\contentsline {paragraph}{H5: Confound-Adjusted Vedic Categorical Analysis.}{29}{subsection.10.8}%
+\contentsline {paragraph}{Samvatsara Analysis.}{29}{subsection.10.8}%
+\contentsline {subsection}{\numberline {10.9}Effect Size Summary and Consolidated Evidence}{29}{subsection.10.9}%
+\contentsline {subsection}{\numberline {10.10}Discussion}{30}{subsection.10.10}%
+\contentsline {paragraph}{The Null Result.}{30}{subsection.10.10}%
+\contentsline {paragraph}{The Seasonal Confound.}{30}{subsection.10.10}%
+\contentsline {paragraph}{Feature Block Multicollinearity.}{30}{subsection.10.10}%
+\contentsline {paragraph}{The Confound-Adjustment Surprise.}{30}{subsection.10.10}%
+\contentsline {paragraph}{Large-$N$ Significance Inflation.}{30}{subsection.10.10}%
+\contentsline {section}{\numberline {11}Conclusion}{30}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Summary of Findings}{30}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}Key Outcomes}{31}{subsection.11.2}%
+\contentsline {subsection}{\numberline {11.3}Future Work}{31}{subsection.11.3}%
+\contentsline {section}{\numberline {A}Feature Block Definitions}{33}{section.A}%
+\contentsline {section}{\numberline {B}Pipeline Audit Summary}{33}{section.B}%
+\contentsline {section}{\numberline {C}Consolidated Evidence Table}{34}{section.C}%

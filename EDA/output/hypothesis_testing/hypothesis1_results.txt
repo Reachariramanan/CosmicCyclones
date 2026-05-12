@@ -1,0 +1,1 @@
+{'baseline_model_rmse': np.float64(4.042967057015612), 'vedic_model_rmse': np.float64(4.6206597353003795), 'improvement_pct': np.float64(-14.288829716836771)}

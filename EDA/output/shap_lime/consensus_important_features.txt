@@ -1,0 +1,57 @@
+CONSENSUS: Features in Top 30 of BOTH SHAP and LIME
+============================================================
+
+SHAP Top 30: 30 features
+LIME Top 30: 30 features
+Consensus:   14 features
+
+  ✓ dinamana_minutes
+  ✓ latitude
+  ✓ longitude
+  ✓ mercury_dec_deg
+  ✓ nearest_lat
+  ✓ neptune_ecliptic_lon_deg
+  ✓ ratrimana_minutes
+  ✓ spline_bearing_deg
+  ✓ spline_end_lon
+  ✓ sun_dec_deg
+  ✓ vedic_arun_speed_deg_per_day
+  ✓ vedic_budha_full_degree
+  ✓ vedic_budha_speed_deg_per_day
+  ✓ vedic_guru_full_degree
+
+SHAP-only features (16):
+  day_of_year
+  elevation
+  mars_ecliptic_lat_deg
+  mercury_ecliptic_lat_deg
+  moon_ecliptic_lat_deg
+  nearest_lon
+  spline_curvature
+  spline_point_count
+  vedic_arun_full_degree
+  vedic_chandra_speed_deg_per_day
+  vedic_surya_declination
+  vedic_surya_padam
+  vedic_varun_speed_deg_per_day
+  vedic_yam_declination
+  vedic_yam_right_ascension
+  venus_ecliptic_lat_deg
+
+LIME-only features (16):
+  mercury_altitude_deg
+  moon_azimuth_deg
+  neptune_azimuth_deg
+  neptune_cos_az
+  spline_length_deg
+  vedic_budha_right_ascension
+  vedic_chandra_declination
+  vedic_chandra_right_ascension
+  vedic_guru_declination
+  vedic_shukra_full_degree
+  vedic_spashth_ketu_full_degree
+  vedic_spashth_ketu_speed_deg_per_day
+  vedic_spashth_rahu_speed_deg_per_day
+  vedic_surya_right_ascension
+  venus_dec_deg
+  venus_ra_hours

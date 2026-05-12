@@ -1,0 +1,90 @@
+SHAP Instance Explanations
+============================================================
+
+XGBoost R² — Train: 0.7842, Test: 0.7071
+Expected value (base): 50.53
+
+IMPORTANT CAVEAT — R² INTERPRETATION:
+----------------------------------------
+The test R²=0.7071 here reflects a RANDOM 80/20 split.
+This splits within storms, so training and test observations from
+the same storm can appear in both sets. Consecutive track points
+for a storm are highly autocorrelated — this inflates R² artificially.
+03_advanced_eda.py uses GroupKFold (by storm_id) which prevents this
+and gives a more honest out-of-storm generalization estimate.
+SHAP importance rankings here reflect which features the model learned
+to exploit, but do not confirm causal relationships.
+For production use, average SHAP values across multiple random seeds
+to assess stability of importance rankings.
+----------------------------------------
+
+Instance 0: Actual=45.0, Predicted=41.1
+  Top 5 POSITIVE contributions:
+    hour_utc: SHAP=+2.70 (value=22.0000)
+    spline_bearing_deg: SHAP=+1.65 (value=0.0000)
+    dinamana_minutes: SHAP=+1.62 (value=864.1500)
+    spline_end_lon: SHAP=+1.56 (value=-89.8000)
+    vedic_lagna_speed_deg_per_day: SHAP=+1.25 (value=298.3500)
+  Top 5 NEGATIVE contributions:
+    longitude: SHAP=-4.72 (value=-89.8000)
+    saturn_cos_alt: SHAP=-1.57 (value=0.2629)
+    mercury_dec_deg: SHAP=-1.53 (value=24.0372)
+    mars_ecliptic_lat_deg: SHAP=-0.89 (value=-2.5514)
+    vedic_chandra_speed_deg_per_day: SHAP=-0.87 (value=13.5600)
+
+Instance 1835: Actual=27.0, Predicted=27.7
+  Top 5 POSITIVE contributions:
+    spline_displacement: SHAP=+1.78 (value=0.2691)
+    day_of_year: SHAP=+1.02 (value=341.0000)
+    saturn_dec_deg: SHAP=+0.89 (value=-22.6645)
+    elevation: SHAP=+0.61 (value=1318.0000)
+    vedic_rahu_padam: SHAP=+0.33 (value=1.0000)
+  Top 5 NEGATIVE contributions:
+    spline_end_lon: SHAP=-4.62 (value=150.7000)
+    latitude: SHAP=-3.82 (value=-15.5200)
+    ratrimana_minutes: SHAP=-2.74 (value=769.2667)
+    mercury_ecliptic_lat_deg: SHAP=-2.58 (value=2.7131)
+    dinamana_minutes: SHAP=-2.12 (value=671.3000)
+
+Instance 3670: Actual=30.0, Predicted=38.5
+  Top 5 POSITIVE contributions:
+    longitude: SHAP=+1.91 (value=146.8000)
+    vedic_chandra_speed_deg_per_day: SHAP=+0.94 (value=14.4900)
+    mercury_ra_hours: SHAP=+0.57 (value=23.4229)
+    mercury_ecliptic_lon_deg: SHAP=+0.57 (value=352.2287)
+    vedic_arun_speed_deg_per_day: SHAP=+0.54 (value=0.0400)
+  Top 5 NEGATIVE contributions:
+    latitude: SHAP=-7.45 (value=-11.3000)
+    spline_end_lon: SHAP=-2.53 (value=146.8000)
+    mercury_ecliptic_lat_deg: SHAP=-1.34 (value=3.2373)
+    spline_bearing_deg: SHAP=-1.29 (value=180.0000)
+    vedic_surya_full_degree: SHAP=-1.28 (value=332.0900)
+
+Instance 5505: Actual=28.0, Predicted=40.6
+  Top 5 POSITIVE contributions:
+    vedic_shani_declination: SHAP=+3.36 (value=-22.7600)
+    longitude: SHAP=+2.80 (value=150.3000)
+    venus_ecliptic_lat_deg: SHAP=+1.58 (value=-6.5405)
+    spline_curvature: SHAP=+1.47 (value=1.0001)
+    nearest_lon: SHAP=+1.01 (value=120.5875)
+  Top 5 NEGATIVE contributions:
+    latitude: SHAP=-15.16 (value=8.0000)
+    spline_end_lon: SHAP=-6.20 (value=150.3000)
+    vedic_varun_speed_deg_per_day: SHAP=-2.05 (value=-0.0300)
+    moon_ecliptic_lat_deg: SHAP=-1.25 (value=-5.2160)
+    saturn_dec_deg: SHAP=-0.93 (value=-22.7586)
+
+Instance 7339: Actual=40.0, Predicted=49.7
+  Top 5 POSITIVE contributions:
+    latitude: SHAP=+6.65 (value=21.5000)
+    spline_end_lon: SHAP=+2.55 (value=-108.9000)
+    moon_dec_deg: SHAP=+1.22 (value=-27.8780)
+    spline_curvature: SHAP=+0.74 (value=1.0001)
+    nearest_lat: SHAP=+0.61 (value=19.0549)
+  Top 5 NEGATIVE contributions:
+    longitude: SHAP=-3.12 (value=-108.9000)
+    mars_dec_deg: SHAP=-1.99 (value=23.4937)
+    mercury_ecliptic_lat_deg: SHAP=-1.88 (value=1.5068)
+    mars_ecliptic_lat_deg: SHAP=-0.93 (value=0.1423)
+    vedic_shani_speed_deg_per_day: SHAP=-0.78 (value=-0.0800)
+

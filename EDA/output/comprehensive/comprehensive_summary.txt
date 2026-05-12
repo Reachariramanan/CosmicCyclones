@@ -1,0 +1,39 @@
+================================================================================
+  COMPREHENSIVE EDA SUMMARY REPORT — 2022-2026 Storm Data
+================================================================================
+
+Dataset: 47533 observations, 282 columns
+Storms: 944
+Date range: 2016-07-15 00:00:00+00:00 to 2026-01-24 00:00:00+00:00
+
+--- KEY STATISTICS ---
+Wind: mean=49.9, std=27.4, min=0, max=170
+Pressure: mean=989.9, std=19.5, min=882, max=1019 (n=47471)
+Latitude range: [-44.3, 64.0]
+Longitude range: [-179.8, 256.3]
+
+--- FEATURE COUNTS ---
+Total numeric features: 208
+Astronomical (Skyfield) features: 90
+Vedic planetary features: 75
+Derived features: ~10 (wind_change, displacement, speed, etc.)
+
+--- MISSING DATA (>5%) ---
+  storm_active: 99.7%
+  cone_point_count: 99.0%
+  cone_lat_max: 99.0%
+  cone_area_deg2: 99.0%
+  cone_lat_spread: 99.0%
+  cone_lon_spread: 99.0%
+  cone_lon_max: 99.0%
+  cone_lat_min: 99.0%
+  cone_lon_min: 99.0%
+  spline_curvature: 15.5%
+  spline_point_count: 15.4%
+  spline_bearing_deg: 15.4%
+  spline_end_lat: 15.4%
+  spline_displacement: 15.4%
+  spline_length_deg: 15.4%
+  spline_end_lon: 15.4%
+  anomaly_label: 10.9%
+  anomaly_score: 10.9%

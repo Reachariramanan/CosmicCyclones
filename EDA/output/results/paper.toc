@@ -1,0 +1,36 @@
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Research Questions}{3}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Data}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Source Data}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Dataset Summary}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Missing Data}{5}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Analysis Pipeline}{5}{section.3}%
+\contentsline {section}{\numberline {4}Methodological Corrections}{5}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Circular-Variable Treatment (E2)}{6}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Within-Storm Cross-Validation Leakage (C3)}{6}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Multiple-Comparison Correction (B1)}{6}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}R\textsuperscript {2} Discrepancy Between Stages 3 and 4}{6}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Rahu / Ketu Retrograde Independence}{6}{subsection.4.5}%
+\contentsline {section}{\numberline {5}Results}{6}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Descriptive Statistics and Data Quality}{6}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Kruskal--Wallis Tests on Vedic Categories (BH-Corrected)}{7}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Feature Importance under Storm-Grouped Cross-Validation}{7}{subsection.5.3}%
+\contentsline {subsubsection}{\numberline {5.3.1}Caution on Spline Features}{8}{subsubsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.4}SHAP / LIME Explainability}{8}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Hypothesis Testing Results}{9}{subsection.5.5}%
+\contentsline {subsubsection}{\numberline {5.5.1}H1: Vedic Predictive Lift}{9}{subsubsection.5.5.1}%
+\contentsline {subsubsection}{\numberline {5.5.2}H2: Lunar Phase and Rapid Intensification}{9}{subsubsection.5.5.2}%
+\contentsline {subsubsection}{\numberline {5.5.3}H3: Planetary Speeds and Trajectory Dynamics}{9}{subsubsection.5.5.3}%
+\contentsline {subsubsection}{\numberline {5.5.4}Samvatsara Analysis}{9}{subsubsection.5.5.4}%
+\contentsline {subsubsection}{\numberline {5.5.5}Mars / Rahu / Ketu Analysis}{10}{subsubsection.5.5.5}%
+\contentsline {subsection}{\numberline {5.6}Block-Wise Predictive Modelling}{10}{subsection.5.6}%
+\contentsline {section}{\numberline {6}Discussion}{11}{section.6}%
+\contentsline {subsection}{\numberline {6.1}The Seasonal Confound}{11}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Multicollinearity Between Vedic and Astronomical Features}{11}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Variance Inflation Factors}{11}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Interpretation of SHAP / LIME Consensus Features}{11}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}Limitations}{11}{subsection.6.5}%
+\contentsline {section}{\numberline {7}Conclusion}{12}{section.7}%
+\contentsline {section}{\numberline {A}Feature Block Definitions}{13}{section.A}%
+\contentsline {section}{\numberline {B}Circular-Linear Correlation Results (Top 10)}{14}{section.B}%
+\contentsline {section}{\numberline {C}Pipeline Audit Summary}{14}{section.C}%

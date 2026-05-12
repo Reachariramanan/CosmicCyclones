@@ -1,0 +1,42 @@
+finding_id,source,test_type,feature,statistic,stat_label,p_value,effect_metric,effect_value,effect_interpretation,cohens_d,cohens_d_interp
+RET_GURU,05,Mann-Whitney U,guru retrograde vs direct wind,222381232.0,U,2.3128684460498814e-23,rank-biserial r,0.0576,small,-0.1167,small
+RET_SHANI,05,Mann-Whitney U,shani retrograde vs direct wind,287701469.0,U,4.988765903408708e-06,rank-biserial r,-0.0242,small,0.0125,small
+RET_MANGAL,05,Mann-Whitney U,mangal retrograde vs direct wind,96293298.0,U,0.0004488896390088,rank-biserial r,-0.0323,small,0.0398,small
+RET_BUDHA,05,Mann-Whitney U,budha retrograde vs direct wind,174341576.0,U,2.337799904246324e-22,rank-biserial r,0.0633,small,-0.1018,small
+RET_SHUKRA,05,Mann-Whitney U,shukra retrograde vs direct wind,85699652.0,U,6.619880626410572e-06,rank-biserial r,-0.0442,small,0.0745,small
+RET_ARUN,05,Mann-Whitney U,arun retrograde vs direct wind,301477181.0,U,1.01747662943546e-38,rank-biserial r,-0.0688,small,0.1249,small
+RET_VARUN,05,Mann-Whitney U,varun retrograde vs direct wind,294164036.0,U,2.329952338753825e-59,rank-biserial r,-0.0878,small,0.1392,small
+KW_DRIK_RITU,02,Kruskal-Wallis,drik_ritu vs wind,1214.03,H,2.6840821456089064e-260,epsilon-squared,0.025418,small,,NA
+KW_SUNSIGN,02,Kruskal-Wallis,sunsign vs wind,1123.14,H,5.890709283305625e-234,epsilon-squared,0.019545,small,,NA
+KW_YOGA,02,Kruskal-Wallis,yoga vs wind,143.35,H,3.425466805065444e-18,epsilon-squared,-0.120352,small,,NA
+KW_NAKSHATRA,02,Kruskal-Wallis,nakshatra vs wind,116.09,H,2.3656791542028924e-13,epsilon-squared,-0.118273,small,,NA
+KW_DRIK_AYANA,02,Kruskal-Wallis,drik_ayana vs wind,102.63,H,4.036308963219603e-24,epsilon-squared,0.002117,small,,NA
+KW_MOONSIGN,02,Kruskal-Wallis,moonsign vs wind,77.93,H,3.709041188570962e-12,epsilon-squared,-0.049799,small,,NA
+KW_TITHI,02,Kruskal-Wallis,tithi vs wind,51.26,H,7.4966171463731295e-06,epsilon-squared,-0.115409,small,,NA
+KW_KARANA,02,Kruskal-Wallis,karana vs wind,42.48,H,6.152029136250302e-06,epsilon-squared,-0.085351,small,,NA
+KW_PAKSHA,02,Kruskal-Wallis,paksha vs wind,8.11,H,0.0043924835778584,epsilon-squared,0.000129,small,,NA
+H2_LUNAR_RI,06,Chi-squared,Lunar phase vs RI (>=10 kt),19.6558,chi2,0.006363,Cramer's V,0.0203,small,,NA
+H3_VEDIC_YAM_SPEED_DEG_,06,Spearman,vedic_yam_speed_deg_per_day vs spline_bearing_deg,-0.1782,rho,3.825611300824046e-271,r² (Spearman),0.0318,medium,,NA
+H3_VEDIC_SHANI_SPEED_DE,06,Spearman,vedic_shani_speed_deg_per_day vs spline_bearing_deg,-0.1682,rho,2.2283841499431903e-241,r² (Spearman),0.0283,medium,,NA
+H3_VEDIC_VARUN_SPEED_DE,06,Spearman,vedic_varun_speed_deg_per_day vs spline_bearing_deg,-0.1666,rho,1.0432381836156772e-236,r² (Spearman),0.0278,medium,,NA
+H3_VEDIC_SURYA_SPEED_DE,06,Spearman,vedic_surya_speed_deg_per_day vs spline_bearing_deg,-0.1581,rho,6.18501298406308e-213,r² (Spearman),0.025,medium,,NA
+H3_VEDIC_GURU_SPEED_DEG,06,Spearman,vedic_guru_speed_deg_per_day vs spline_bearing_deg,-0.0558,rho,8.586084116410565e-28,r² (Spearman),0.0031,small,,NA
+H3_VEDIC_ARUN_SPEED_DEG,06,Spearman,vedic_arun_speed_deg_per_day vs spline_bearing_deg,-0.0488,rho,1.0664502384085405e-21,r² (Spearman),0.0024,small,,NA
+H3_VEDIC_MANGAL_SPEED_D,06,Spearman,vedic_mangal_speed_deg_per_day vs spline_bearing_deg,-0.0432,rho,2.6516265293217868e-17,r² (Spearman),0.0019,small,,NA
+H3_VEDIC_SPASHTH_RAHU_S,06,Spearman,vedic_spashth_rahu_speed_deg_per_day vs spline_bearing_deg,0.0353,rho,4.874038555759767e-12,r² (Spearman),0.0012,small,,NA
+H3_VEDIC_SPASHTH_KETU_S,06,Spearman,vedic_spashth_ketu_speed_deg_per_day vs spline_bearing_deg,0.0353,rho,4.874038555759767e-12,r² (Spearman),0.0012,small,,NA
+H3_VEDIC_BUDHA_SPEED_DE,06,Spearman,vedic_budha_speed_deg_per_day vs spline_bearing_deg,0.0281,rho,3.8262619503647555e-08,r² (Spearman),0.0008,small,,NA
+EW_VEDIC_RAHU_FULL_DEGR,06,ANOVA (event window),vedic_rahu_full_degree,18.752,F,2.50854447841492e-05,eta-squared,0.0973,medium,,NA
+EW_VEDIC_KETU_FULL_DEGR,06,ANOVA (event window),vedic_ketu_full_degree,18.752,F,2.5085444785125297e-05,eta-squared,0.0973,medium,,NA
+EW_MARS_ALTITUDE_DEG,06,ANOVA (event window),mars_altitude_deg,1.364,F,0.2444155576764491,eta-squared,0.0077,small,,NA
+EW_VEDIC_SPASHTH_RAHU_S,06,ANOVA (event window),vedic_spashth_rahu_speed_deg_per_day,0.561,F,0.4546990100316824,eta-squared,0.0032,small,,NA
+EW_VEDIC_SPASHTH_KETU_S,06,ANOVA (event window),vedic_spashth_ketu_speed_deg_per_day,0.561,F,0.4546990100316824,eta-squared,0.0032,small,,NA
+EW_VEDIC_RAHU_SPEED_DEG,06,ANOVA (event window),vedic_rahu_speed_deg_per_day,0.355,F,0.5518678950314772,eta-squared,0.002,small,,NA
+EW_VEDIC_KETU_SPEED_DEG,06,ANOVA (event window),vedic_ketu_speed_deg_per_day,0.355,F,0.5518678950314772,eta-squared,0.002,small,,NA
+EW_MARS_ECLIPTIC_LAT_DE,06,ANOVA (event window),mars_ecliptic_lat_deg,0.064,F,0.8005157546041449,eta-squared,0.0004,small,,NA
+EW_VEDIC_MANGAL_FULL_DE,06,ANOVA (event window),vedic_mangal_full_degree,0.049,F,0.8244282714674959,eta-squared,0.0003,small,,NA
+EW_VEDIC_SPASHTH_RAHU_F,06,ANOVA (event window),vedic_spashth_rahu_full_degree,0.024,F,0.8774286817805445,eta-squared,0.0001,small,,NA
+EW_VEDIC_SPASHTH_KETU_F,06,ANOVA (event window),vedic_spashth_ketu_full_degree,0.024,F,0.8774286817808471,eta-squared,0.0001,small,,NA
+EW_VEDIC_MANGAL_SPEED_D,06,ANOVA (event window),vedic_mangal_speed_deg_per_day,0.001,F,0.972645999053858,eta-squared,0.0,small,,NA
+EW_MARS_DEC_DEG,06,ANOVA (event window),mars_dec_deg,0.0,F,0.997333793116785,eta-squared,0.0,small,,NA
+MARS_RETRO_CURVE,06,ANOVA,Mangal retrograde vs spline_curvature,19.34,F,1.1e-05,eta-squared,0.000505,small,,NA

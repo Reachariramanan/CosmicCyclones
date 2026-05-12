@@ -1,0 +1,175 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{demaria2014advances,zhang2018tropical}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{3}{section.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Background and Problem Statement}{3}{subsection.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Motivation and Significance}{3}{subsection.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Objectives and Contributions}{3}{subsection.1.3}\protected@file@percent }
+\citation{demaria2014advances}
+\citation{zhang2018tropical}
+\citation{kaplan2003}
+\citation{lundberg2017unified}
+\citation{ribeiro2016}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4}Paper Organisation}{4}{subsection.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Works}{4}{section.2}\protected@file@percent }
+\newlabel{sec:related}{{2}{4}{Related Works}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Tropical Cyclone Intensity Prediction}{4}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Astronomical and Lunar Associations with Weather}{4}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Machine Learning Feature Evaluation Methods}{5}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Limitations of Prior Works}{5}{subsection.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}System Model and Proposed Methodology}{5}{section.3}\protected@file@percent }
+\newlabel{sec:methodology}{{3}{5}{System Model and Proposed Methodology}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Overall Architecture}{5}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Methodological Corrections Applied}{5}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Circular-Variable Treatment (E2).}{5}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Within-Storm Cross-Validation Leakage (C3).}{5}{equation.1}\protected@file@percent }
+\citation{skyfield2019}
+\@writefile{toc}{\contentsline {paragraph}{Multiple-Comparison Correction (B1).}{6}{equation.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{$R^2$ Discrepancy (D1).}{6}{equation.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Rahu/Ketu Independence (A2).}{6}{equation.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Dataset Description}{6}{section.4}\protected@file@percent }
+\newlabel{sec:data}{{4}{6}{Dataset Description}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Data Sources}{6}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Vedic Panchang Features}{7}{subsection.4.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Vedic Panchang categorical features used in this study.}}{7}{table.caption.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab:panchang_features}{{1}{7}{Vedic Panchang categorical features used in this study}{table.caption.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Dataset Summary}{7}{subsection.4.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Dataset overview after transformation and join.}}{7}{table.caption.2}\protected@file@percent }
+\newlabel{tab:dataset}{{2}{7}{Dataset overview after transformation and join}{table.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Inclusion and Exclusion Criteria}{8}{subsection.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Preprocessing}{8}{section.5}\protected@file@percent }
+\newlabel{sec:preprocessing}{{5}{8}{Preprocessing}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Techniques Applied}{8}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Rapid Intensification Definition}{8}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Feature Extraction and Selection}{9}{section.6}\protected@file@percent }
+\newlabel{sec:features}{{6}{9}{Feature Extraction and Selection}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Tree-Model Ensemble Feature Importance}{9}{subsection.6.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Top-30 feature importances across RandomForest, XGBoost, and LightGBM (left to right panels). Geographic and track features (longitude, latitude, spline\_end\_lon) dominate. Vedic features appear from rank 5 onward, with \texttt  {vedic\_chandra\_speed\_deg\_per\_day} as the highest-ranked Vedic feature (mean importance $= 0.0203$).}}{9}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:fi_top30}{{1}{9}{Top-30 feature importances across RandomForest, XGBoost, and LightGBM (left to right panels). Geographic and track features (longitude, latitude, spline\_end\_lon) dominate. Vedic features appear from rank 5 onward, with \texttt {vedic\_chandra\_speed\_deg\_per\_day} as the highest-ranked Vedic feature (mean importance $= 0.0203$)}{figure.caption.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Contrast between the 25 most important and 25 least important features (mean importance across RF/XGB/LGB). The bottom-25 are overwhelmingly trigonometric altitude encodings (sin/cos altitude for individual planets) and binary flags.}}{10}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:fi_contrast}{{2}{10}{Contrast between the 25 most important and 25 least important features (mean importance across RF/XGB/LGB). The bottom-25 are overwhelmingly trigonometric altitude encodings (sin/cos altitude for individual planets) and binary flags}{figure.caption.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Mutual Information with Wind Speed}{10}{subsection.6.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Top-30 features by Mutual Information with wind speed. \texttt  {lahiri\_ayanamsha} leads (MI $= 0.720$) due to its strong temporal trend (precession-corrected longitude changes systematically with year). Rahu/Ketu degree features follow for the same reason. Meteorological features (latitude, spline geometry) appear after rank 10.}}{11}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:mi_top30}{{3}{11}{Top-30 features by Mutual Information with wind speed. \texttt {lahiri\_ayanamsha} leads (MI $= 0.720$) due to its strong temporal trend (precession-corrected longitude changes systematically with year). Rahu/Ketu degree features follow for the same reason. Meteorological features (latitude, spline geometry) appear after rank 10}{figure.caption.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Circular-Linear Correlations for Angular Features}{11}{subsection.6.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Circular-linear correlations: Vedic planet degrees vs wind speed. $r_{\text  {circ}} = \max (|r_{\sin }|, |r_{\cos }|)$. All values below 0.10.}}{12}{table.caption.6}\protected@file@percent }
+\newlabel{tab:vedic_circ}{{3}{12}{Circular-linear correlations: Vedic planet degrees vs wind speed. $r_{\text {circ}} = \max (|r_{\sin }|, |r_{\cos }|)$. All values below 0.10}{table.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Circular-linear correlations per Vedic planet degree (left panel: correct circular-linear $r$; right panel: naive Pearson $r$ shown for comparison only). Yama shows the highest correlation ($r_{\text  {circ}} \approx 0.089$), followed by Guru/Jupiter ($r_{\text  {circ}} \approx 0.071$). All values are below $r = 0.10$, explaining less than 1\% of wind speed variance.}}{12}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:vedic_circ}{{4}{12}{Circular-linear correlations per Vedic planet degree (left panel: correct circular-linear $r$; right panel: naive Pearson $r$ shown for comparison only). Yama shows the highest correlation ($r_{\text {circ}} \approx 0.089$), followed by Guru/Jupiter ($r_{\text {circ}} \approx 0.071$). All values are below $r = 0.10$, explaining less than 1\% of wind speed variance}{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}SHAP Explainability Analysis}{12}{section.7}\protected@file@percent }
+\newlabel{sec:models}{{7}{12}{SHAP Explainability Analysis}{section.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}SHAP Feature Importance}{12}{subsection.7.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Mean absolute SHAP values for the top-30 features. Latitude dominates (mean $|\text  {SHAP}| \approx 4.2$~kt), followed by longitude and spline\_end\_lon. The first Vedic feature (\texttt  {vedic\_chandra\_speed\_deg\_per\_day}) appears at rank 8.}}{13}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:shap_bar}{{5}{13}{Mean absolute SHAP values for the top-30 features. Latitude dominates (mean $|\text {SHAP}| \approx 4.2$~kt), followed by longitude and spline\_end\_lon. The first Vedic feature (\texttt {vedic\_chandra\_speed\_deg\_per\_day}) appears at rank 8}{figure.caption.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces SHAP contrast: top-25 vs bottom-25 features by mean $|$SHAP$|$. Note the order-of-magnitude difference in axis scales. Bottom features are predominantly trigonometric altitude encodings (e.g., \texttt  {mars\_sin\_alt}, \texttt  {saturn\_sin\_alt}) with near-zero SHAP values ($< 0.01$~kt average contribution).}}{14}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:shap_contrast}{{6}{14}{SHAP contrast: top-25 vs bottom-25 features by mean $|$SHAP$|$. Note the order-of-magnitude difference in axis scales. Bottom features are predominantly trigonometric altitude encodings (e.g., \texttt {mars\_sin\_alt}, \texttt {saturn\_sin\_alt}) with near-zero SHAP values ($< 0.01$~kt average contribution)}{figure.caption.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}SHAP Feature Interactions}{14}{subsection.7.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Top-15 SHAP Feature Interactions by mean $|$interaction value$|$.}}{14}{table.caption.10}\protected@file@percent }
+\newlabel{tab:shap_interact}{{4}{14}{Top-15 SHAP Feature Interactions by mean $|$interaction value$|$}{table.caption.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Top-20 SHAP feature interactions. Latitude $\times $ spline\_bearing\_deg is the dominant pair (interaction = 0.822), reflecting how geographic position modulates the effect of storm track curvature on intensity. Several Vedic speed features appear in cross-terms with latitude.}}{15}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:shap_interact}{{7}{15}{Top-20 SHAP feature interactions. Latitude $\times $ spline\_bearing\_deg is the dominant pair (interaction = 0.822), reflecting how geographic position modulates the effect of storm track curvature on intensity. Several Vedic speed features appear in cross-terms with latitude}{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}LIME Explainability and SHAP vs LIME Consensus}{15}{section.8}\protected@file@percent }
+\newlabel{sec:fusion}{{8}{15}{LIME Explainability and SHAP vs LIME Consensus}{section.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces LIME aggregated feature importance (top-30). Latitude, spline\_end\_lon, and longitude lead by a large margin ($>3\times $ the next feature). Fourteen Vedic or semi-Vedic features (including \texttt  {dinamana\_minutes}, \texttt  {vedic\_budha\_full\_degree}, \texttt  {vedic\_guru\_full\_degree}, \texttt  {vedic\_arun\_speed\_deg\_per\_day}) appear in the top-30.}}{16}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:lime_agg}{{8}{16}{LIME aggregated feature importance (top-30). Latitude, spline\_end\_lon, and longitude lead by a large margin ($>3\times $ the next feature). Fourteen Vedic or semi-Vedic features (including \texttt {dinamana\_minutes}, \texttt {vedic\_budha\_full\_degree}, \texttt {vedic\_guru\_full\_degree}, \texttt {vedic\_arun\_speed\_deg\_per\_day}) appear in the top-30}{figure.caption.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Normalised SHAP vs LIME importance for the top-20 consensus features. Both methods agree on geographic and track features dominating. Disagreements appear for track geometry features (e.g., \texttt  {spline\_bearing\_deg} ranks higher in SHAP; \texttt  {spline\_end\_lon} ranks slightly higher in LIME). Vedic features show moderate agreement.}}{17}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:shap_vs_lime}{{9}{17}{Normalised SHAP vs LIME importance for the top-20 consensus features. Both methods agree on geographic and track features dominating. Disagreements appear for track geometry features (e.g., \texttt {spline\_bearing\_deg} ranks higher in SHAP; \texttt {spline\_end\_lon} ranks slightly higher in LIME). Vedic features show moderate agreement}{figure.caption.13}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Performance Analysis}{17}{section.9}\protected@file@percent }
+\newlabel{sec:performance}{{9}{17}{Performance Analysis}{section.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}Experimental Setup}{17}{subsection.9.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.2}Evaluation Metrics}{18}{subsection.9.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.3}Hardware and Software}{18}{subsection.9.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.4}Variance Inflation Factor Analysis}{18}{subsection.9.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Variance Inflation Factors for representative features. All values $< 2.0$ indicate low multicollinearity in this subset.}}{19}{table.caption.14}\protected@file@percent }
+\newlabel{tab:vif}{{5}{19}{Variance Inflation Factors for representative features. All values $< 2.0$ indicate low multicollinearity in this subset}{table.caption.14}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Variance Inflation Factor barplot for the 14-feature representative subset. All bars fall far below the moderate threshold (VIF = 5, orange dashed) and the high threshold (VIF = 10, red dashed), confirming negligible multicollinearity within this subset. Note: the full 186-feature space contains groups of near-duplicate features (e.g., Rahu vs Spashth-Rahu) with higher inter-group correlations.}}{19}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:vif}{{10}{19}{Variance Inflation Factor barplot for the 14-feature representative subset. All bars fall far below the moderate threshold (VIF = 5, orange dashed) and the high threshold (VIF = 10, red dashed), confirming negligible multicollinearity within this subset. Note: the full 186-feature space contains groups of near-duplicate features (e.g., Rahu vs Spashth-Rahu) with higher inter-group correlations}{figure.caption.15}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {10}Results and Discussion}{20}{section.10}\protected@file@percent }
+\newlabel{sec:results}{{10}{20}{Results and Discussion}{section.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}Predictive Modelling Results}{20}{subsection.10.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Regression performance on the chronological holdout test set ($n = 9{,}315$). $\Delta $RMSE\% computed relative to the Meteo only baseline.}}{20}{table.caption.16}\protected@file@percent }
+\newlabel{tab:rmse}{{6}{20}{Regression performance on the chronological holdout test set ($n = 9{,}315$). $\Delta $RMSE\% computed relative to the Meteo only baseline}{table.caption.16}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Forward-chaining cross-validation RMSE (kt) by fold and model. Bold indicates the best model in each fold.}}{20}{table.caption.17}\protected@file@percent }
+\newlabel{tab:cv}{{7}{20}{Forward-chaining cross-validation RMSE (kt) by fold and model. Bold indicates the best model in each fold}{table.caption.17}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Group-level permutation RMSE lift on the full model test set ($n_{\text  {repeats}} = 5$). Higher lift indicates greater contribution.}}{20}{table.caption.18}\protected@file@percent }
+\newlabel{tab:group_imp}{{8}{20}{Group-level permutation RMSE lift on the full model test set ($n_{\text {repeats}} = 5$). Higher lift indicates greater contribution}{table.caption.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Four-panel publication figure. \textbf  {(A)} Model RMSE comparison; meteorological baseline (dashed blue) is the best-performing model and adding Vedic features monotonically increases error. \textbf  {(B)} Feature group RMSE lift; Vedic/Panchang lift of 0.010~kt is negligible relative to the meteorological group's 0.582~kt. \textbf  {(C)} RI rate by lunar phase (24-h rolling window); Waning Crescent (dark red) is the peak phase, dashed line marks overall mean RI rate. \textbf  {(D)} Top-10 Spearman $\rho $ between planetary speed and storm bearing; all negative (faster speed $\to $ more westward track) and statistically significant but small ($r^2 < 0.032$).}}{21}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:pub}{{11}{21}{Four-panel publication figure. \textbf {(A)} Model RMSE comparison; meteorological baseline (dashed blue) is the best-performing model and adding Vedic features monotonically increases error. \textbf {(B)} Feature group RMSE lift; Vedic/Panchang lift of 0.010~kt is negligible relative to the meteorological group's 0.582~kt. \textbf {(C)} RI rate by lunar phase (24-h rolling window); Waning Crescent (dark red) is the peak phase, dashed line marks overall mean RI rate. \textbf {(D)} Top-10 Spearman $\rho $ between planetary speed and storm bearing; all negative (faster speed $\to $ more westward track) and statistically significant but small ($r^2 < 0.032$)}{figure.caption.19}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}Vedic Category Analysis: Kruskal--Wallis Tests}{21}{subsection.10.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Kruskal--Wallis tests (wind speed by Vedic category) with BH correction. BH-corrected significance threshold $\alpha = 0.05$.}}{22}{table.caption.20}\protected@file@percent }
+\newlabel{tab:kw}{{9}{22}{Kruskal--Wallis tests (wind speed by Vedic category) with BH correction. BH-corrected significance threshold $\alpha = 0.05$}{table.caption.20}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.3}Nakshatra Intensity Analysis}{23}{subsection.10.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Nakshatra vs Intensity classification (High/Low wind speed split). The chi-squared test ($\chi ^2 = 106.04$, $p < 0.0001$) is statistically significant, but the variation in High/Low split percentages across the 27 Nakshatras spans only $\approx 4$--8 percentage points, consistent with a trivially small effect size. Thiruvathirai shows the lowest High-intensity fraction ($\approx 48\%$) while Anusham shows the highest ($\approx 58\%$).}}{23}{figure.caption.21}\protected@file@percent }
+\newlabel{fig:nakshatra}{{12}{23}{Nakshatra vs Intensity classification (High/Low wind speed split). The chi-squared test ($\chi ^2 = 106.04$, $p < 0.0001$) is statistically significant, but the variation in High/Low split percentages across the 27 Nakshatras spans only $\approx 4$--8 percentage points, consistent with a trivially small effect size. Thiruvathirai shows the lowest High-intensity fraction ($\approx 48\%$) while Anusham shows the highest ($\approx 58\%$)}{figure.caption.21}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.4}Tithi $\times $ Nakshatra Interaction Heatmaps}{24}{subsection.10.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Mean wind speed (kt) by Tithi (rows) and Nakshatra (columns). Darker cells indicate higher mean wind. Isolated high values (e.g., Pournami $\times $ Mirugasirisham = 74~kt; Egadashi $\times $ Moolam = 71~kt) reflect small cell counts rather than systematic astronomical effects. No systematic high-intensity zone is visible across any Tithi--Nakshatra combination.}}{24}{figure.caption.22}\protected@file@percent }
+\newlabel{fig:tn_mean}{{13}{24}{Mean wind speed (kt) by Tithi (rows) and Nakshatra (columns). Darker cells indicate higher mean wind. Isolated high values (e.g., Pournami $\times $ Mirugasirisham = 74~kt; Egadashi $\times $ Moolam = 71~kt) reflect small cell counts rather than systematic astronomical effects. No systematic high-intensity zone is visible across any Tithi--Nakshatra combination}{figure.caption.22}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Median wind speed (kt) by Tithi (rows) and Nakshatra (columns). More robust to outliers than the mean heatmap. The Thirayodasi $\times $ Bharani cell shows the highest median (89~kt) but represents very few observations. The overall range of medians ($\approx 20$--90~kt) reflects natural cyclone lifecycle variation rather than systematic Vedic calendar effects.}}{25}{figure.caption.23}\protected@file@percent }
+\newlabel{fig:tn_median}{{14}{25}{Median wind speed (kt) by Tithi (rows) and Nakshatra (columns). More robust to outliers than the mean heatmap. The Thirayodasi $\times $ Bharani cell shows the highest median (89~kt) but represents very few observations. The overall range of medians ($\approx 20$--90~kt) reflects natural cyclone lifecycle variation rather than systematic Vedic calendar effects}{figure.caption.23}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.5}Retrograde Planetary Motion and Storm Intensity}{25}{subsection.10.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Retrograde effects on storm intensity. Left panel: retrograde percentage by planet (Varun retrograde 60\% of all observations, making its retrograde phase the majority condition). Right panel: median wind speed difference (retrograde $-$ direct). Shukra (Venus) shows the largest difference (+5~kt) but is retrograde in only 7.9\% of observations and has rank-biserial $r = 0.044$ (small). Guru (Jupiter) shows a negative difference ($-2$~kt). All effects are statistically significant at $p < 0.001$ due to large $N$, but all effect sizes are small ($|r_{\text  {rb}}| < 0.10$, Cohen's $d < 0.15$).}}{25}{figure.caption.24}\protected@file@percent }
+\newlabel{fig:retrograde}{{15}{25}{Retrograde effects on storm intensity. Left panel: retrograde percentage by planet (Varun retrograde 60\% of all observations, making its retrograde phase the majority condition). Right panel: median wind speed difference (retrograde $-$ direct). Shukra (Venus) shows the largest difference (+5~kt) but is retrograde in only 7.9\% of observations and has rank-biserial $r = 0.044$ (small). Guru (Jupiter) shows a negative difference ($-2$~kt). All effects are statistically significant at $p < 0.001$ due to large $N$, but all effect sizes are small ($|r_{\text {rb}}| < 0.10$, Cohen's $d < 0.15$)}{figure.caption.24}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Retrograde vs direct planetary motion: Mann--Whitney $U$ results. $r_{\text  {rb}}$ = rank-biserial correlation; $d$ = Cohen's $d$. All effects classified as small ($|r_{\text  {rb}}| < 0.10$).}}{26}{table.caption.25}\protected@file@percent }
+\newlabel{tab:retro}{{10}{26}{Retrograde vs direct planetary motion: Mann--Whitney $U$ results. $r_{\text {rb}}$ = rank-biserial correlation; $d$ = Cohen's $d$. All effects classified as small ($|r_{\text {rb}}| < 0.10$)}{table.caption.25}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.6}Planetary Aspect Correlations}{26}{subsection.10.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Pearson correlations of planetary aspect angles with wind speed. The Jupiter--Saturn aspect shows the highest positive correlation ($r = 0.077$); Venus--Jupiter shows the most negative ($r = -0.039$). All correlations are weak ($|r| < 0.10$), explaining less than 0.6\% of variance in wind speed. These are the weakest systematic signals in the entire dataset.}}{26}{figure.caption.26}\protected@file@percent }
+\newlabel{fig:aspects}{{16}{26}{Pearson correlations of planetary aspect angles with wind speed. The Jupiter--Saturn aspect shows the highest positive correlation ($r = 0.077$); Venus--Jupiter shows the most negative ($r = -0.039$). All correlations are weak ($|r| < 0.10$), explaining less than 0.6\% of variance in wind speed. These are the weakest systematic signals in the entire dataset}{figure.caption.26}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces Planetary aspect Pearson correlations with wind speed ($N = 47{,}533$). Maximum $|r| = 0.077$.}}{27}{table.caption.27}\protected@file@percent }
+\newlabel{tab:aspects}{{11}{27}{Planetary aspect Pearson correlations with wind speed ($N = 47{,}533$). Maximum $|r| = 0.077$}{table.caption.27}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.7}Intensity Change Analysis}{28}{subsection.10.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Storm intensity change analysis. Top-left: distribution of 6-hourly wind changes with RI ($\geq +30$~kt) and Rapid Weakening (RW, $\leq -30$~kt) thresholds marked. The distribution is strongly peaked at zero change. Top-right: counts of RI and RW events vs total observations; both RI and RW events are rare relative to the total. Bottom-left: scatter of wind change vs sun altitude angle (5{,}000-sample subset) --- no trend is discernible. Bottom-right: scatter of wind change vs moon ecliptic longitude --- no systematic relationship is visible.}}{28}{figure.caption.28}\protected@file@percent }
+\newlabel{fig:intensity}{{17}{28}{Storm intensity change analysis. Top-left: distribution of 6-hourly wind changes with RI ($\geq +30$~kt) and Rapid Weakening (RW, $\leq -30$~kt) thresholds marked. The distribution is strongly peaked at zero change. Top-right: counts of RI and RW events vs total observations; both RI and RW events are rare relative to the total. Bottom-left: scatter of wind change vs sun altitude angle (5{,}000-sample subset) --- no trend is discernible. Bottom-right: scatter of wind change vs moon ecliptic longitude --- no systematic relationship is visible}{figure.caption.28}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.8}Hypothesis Testing Results}{28}{subsection.10.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{H1: Vedic Predictive Lift.}{28}{subsection.10.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{H2: Lunar Phase and Rapid Intensification.}{28}{subsection.10.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{H3: Planetary Speeds and Storm Bearing.}{29}{subsection.10.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{H4: Retrograde Effects.}{29}{subsection.10.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{H5: Confound-Adjusted Vedic Categorical Analysis.}{29}{subsection.10.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Samvatsara Analysis.}{29}{subsection.10.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.9}Effect Size Summary and Consolidated Evidence}{29}{subsection.10.9}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {12}{\ignorespaces Consolidated effect sizes for key significant findings. Size classification: small = $|r_{\text  {rb}}| < 0.10$, $d < 0.20$, $V < 0.10$, $\eta ^2 < 0.01$; medium = $0.10$--$0.30$, $0.20$--$0.50$, $0.10$--$0.30$, $0.06$--$0.14$.}}{29}{table.caption.29}\protected@file@percent }
+\newlabel{tab:effect_sizes}{{12}{29}{Consolidated effect sizes for key significant findings. Size classification: small = $|r_{\text {rb}}| < 0.10$, $d < 0.20$, $V < 0.10$, $\eta ^2 < 0.01$; medium = $0.10$--$0.30$, $0.20$--$0.50$, $0.10$--$0.30$, $0.06$--$0.14$}{table.caption.29}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.10}Discussion}{30}{subsection.10.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{The Null Result.}{30}{subsection.10.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{The Seasonal Confound.}{30}{subsection.10.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Feature Block Multicollinearity.}{30}{subsection.10.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{The Confound-Adjustment Surprise.}{30}{subsection.10.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Large-$N$ Significance Inflation.}{30}{subsection.10.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11}Conclusion}{30}{section.11}\protected@file@percent }
+\newlabel{sec:conclusion}{{11}{30}{Conclusion}{section.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.1}Summary of Findings}{30}{subsection.11.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.2}Key Outcomes}{31}{subsection.11.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.3}Future Work}{31}{subsection.11.3}\protected@file@percent }
+\bibstyle{plainnat}
+\bibcite{demaria2014advances}{{1}{}{{}}{{}}}
+\bibcite{zhang2018tropical}{{2}{}{{}}{{}}}
+\bibcite{skyfield2019}{{3}{}{{}}{{}}}
+\bibcite{kaplan2003}{{4}{}{{}}{{}}}
+\bibcite{benjamini1995}{{5}{}{{}}{{}}}
+\bibcite{lundberg2017unified}{{6}{}{{}}{{}}}
+\bibcite{ribeiro2016}{{7}{}{{}}{{}}}
+\bibcite{breiman2001}{{8}{}{{}}{{}}}
+\bibcite{kruskal1952}{{9}{}{{}}{{}}}
+\bibcite{shapiro1965}{{10}{}{{}}{{}}}
+\bibcite{gray1984}{{11}{}{{}}{{}}}
+\bibcite{klotzbach2010}{{12}{}{{}}{{}}}
+\bibcite{misra2009}{{13}{}{{}}{{}}}
+\bibcite{emanuel2003}{{14}{}{{}}{{}}}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Feature Block Definitions}{33}{section.A}\protected@file@percent }
+\newlabel{app:blocks}{{A}{33}{Feature Block Definitions}{section.A}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {B}Pipeline Audit Summary}{33}{section.B}\protected@file@percent }
+\newlabel{app:audit}{{B}{33}{Pipeline Audit Summary}{section.B}{}}
+\gdef \LT@i {\LT@entry 
+    {1}{68.9055pt}\LT@entry 
+    {1}{168.49014pt}\LT@entry 
+    {1}{51.41397pt}\LT@entry 
+    {1}{125.81102pt}}
+\providecommand\NAT@force@numbers{}\NAT@force@numbers
+\@writefile{toc}{\contentsline {section}{\numberline {C}Consolidated Evidence Table}{34}{section.C}\protected@file@percent }
+\newlabel{app:evidence}{{C}{34}{Consolidated Evidence Table}{section.C}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {13}{\ignorespaces Full 16-finding evidence table with source scripts, effect sizes, and verdicts.}}{34}{table.13}\protected@file@percent }
+\newlabel{tab:evidence_full}{{13}{34}{Full 16-finding evidence table with source scripts, effect sizes, and verdicts}{table.13}{}}
+\gdef \@abspage@last{36}
