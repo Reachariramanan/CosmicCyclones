@@ -1,2 +1,6 @@
 # CosmicCyclones
-Cosmic Cyclones is a research-focused machine learning framework for analyzing tropical cyclone intensity using meteorological, astronomical, and Vedic Panchang-derived features. The project integrates global cyclone track archives, Skyfield/JPL ephemeris computations, and Panchang-based temporal descriptors to evaluate whether celestial and cyclical variables contribute measurable predictive value beyond conventional atmospheric predictors. The repository includes data preprocessing pipelines, feature engineering modules, statistical hypothesis testing, SHAP/LIME explainability workflows, and predictive modeling experiments conducted on 47,000+ cyclone observations across multiple ocean basins.
+Cosmic Cyclones is a research-focused machine learning framework for analyzing tropical cyclone intensity using meteorological, astronomical, and Vedic Panchang-derived features.
+
+The project integrates global cyclone track archives, Skyfield/JPL ephemeris computations, and Panchang-based temporal descriptors to evaluate whether celestial and cyclical variables contribute measurable predictive value beyond conventional atmospheric predictors.
+
+The repository includes data preprocessing pipelines, feature engineering modules, statistical hypothesis testing, SHAP/LIME explainability workflows, and predictive modeling experiments conducted on 47,000+ cyclone observations across multiple ocean basins.
